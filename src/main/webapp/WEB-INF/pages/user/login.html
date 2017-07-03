@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <!-- 引入公共头部文件 -->
+    <head>
+        <title>用户登录</title>
+        <!-- 引入公共CSS文件 -->
+        <baseCss th:include="baseCss"></baseCss>
+        <link href="resources/css/user/login.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- 引入头部内容 -->
+        <div th:include="header"></div>
+        <div class="container" id="app">
+            <div class="row">
+                <div class="col-md-8">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <template v-for="image in dataList">
+                                <li v-if="image.imageActive == 0" data-target="#carousel-example-generic"
+                                    v-bind:data-slide-to="image.imageOrder"></li>
+                                <li v-if="image.imageActive == 1" data-target="#carousel-example-generic"
+                                    class="active" v-bind:data-slide-to="image.imageOrder"></li>
+                            </template>
+                        </ol>
+
+                        <div class="carousel-inner" role="listbox">
+                            <template v-for="image in dataList">
+                                <div v-if="image.imageActive == 0" class="item">
+                                    <img v-bind:src="image.imageUrl" v-bind:title="image.imageTittle" />
+                                    <div class="carousel-caption">
+                                        {{image.imageComment}}
+                                    </div>
+                                </div>
+                                <div v-if="image.imageActive == 1" class="item active">
+                                    <img v-bind:src="image.imageUrl" v-bind:title="image.imageTitle" />
+                                    <div class="carousel-caption">
+                                        {{image.imageComment}}
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+
+                        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <!-- start login -->
+                    <div id="loginDiv">
+                        <h2><span class="fontawesome-lock"></span>登录</h2>
+                        <form action="javascript:void(0);" method="POST">
+                            <fieldset>
+                                <div class="msgDiv">
+                                    <span id="errorMsg"></span>
+                                </div>
+                                <p></p>
+                                <p>
+                                    <a class="clearBtn" href="javascript:;">X</a>
+                                    <input type="text" id="username" name="username" placeholder="用户名/手机号" class="loginText" />
+                                </p>
+                                <p>
+                                    <a class="clearBtn" href="javascript:;">X</a>
+                                    <input type="password" id="password" name="password" placeholder="密码" class="loginText" />
+                                </p>
+                                <p>
+                                    <div id="checkCodeDiv">
+                                        <input type="text" id="checkCode" name="checkCode" placeholder="验证码" class="codeText pullLeft" />
+                                        <img src="http://image.loving1314.com/filestore/loginPage/code.jpg"
+                                             title="看不清，换一张" class="pullRight" />
+                                    </div>
+                                </p>
+                                <p>
+                                    <div>
+                                        <button class="loginBtn" id="login">登&nbsp;&nbsp;&nbsp;&nbsp;录</button>
+                                    </div>
+                                </p>
+                                <div class="fontSize pullRight">
+                                    <a href="javascript:;" id="forgetPassword">忘记密码</a>
+                                    &nbsp;&nbsp;
+                                    <a href="javascript:;" id="register">用户注册</a>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <!-- end login -->
+                </div>
+            </div>
+        </div>
+        <!-- 引入底部内容 -->
+        <footer th:include="footer"></footer>
+        <!-- 引入公共JS文件 -->
+        <baseJs th:include="baseJs"></baseJs>
+        <script type="text/javascript" src="resources/js/user/login.js"></script>
+    </body>
+</html>

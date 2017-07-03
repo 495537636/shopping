@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunshine.shopping.mapper.LoginImageMapper">
+    <resultMap id="BaseResultMap" type="com.sunshine.shopping.model.entity.LoginImageEntity">
+        <id column="image_id" property="imageId" jdbcType="VARCHAR"/>
+        <result column="image_url" property="imageUrl" jdbcType="VARCHAR"/>
+        <result column="image_title" property="imageTitle" jdbcType="VARCHAR"/>
+        <result column="image_comment" property="imageComment" jdbcType="VARCHAR"/>
+        <result column="image_order" property="imageOrder" jdbcType="INTEGER"/>
+        <result column="image_flag" property="imageFlag" jdbcType="INTEGER"/>
+        <result column="image_active" property="imageActive" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        image_id, image_url, image_title, image_comment, image_order, image_flag, image_active
+    </sql>
+
+    <!-- 查询图片列表 -->
+    <select id="queryList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from login_image where image_flag = 0
+        order by image_order
+    </select>
+
+</mapper>

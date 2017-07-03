@@ -1,0 +1,173 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* ---------- FONTAWESOME ---------- */
+/* ---------- http://fortawesome.github.com/Font-Awesome/ ---------- */
+/* ---------- http://weloveiconfonts.com/ ---------- */
+
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+/* ---------- ERIC MEYER'S RESET CSS ---------- */
+/* ---------- http://meyerweb.com/eric/tools/css/reset/ ---------- */
+
+@import url(http://meyerweb.com/eric/tools/css/reset/reset.css);
+
+/* ---------- FONTAWESOME ---------- */
+
+[class*="fontawesome-"]:before {
+    font-family: 'FontAwesome', sans-serif;
+}
+
+/* ---------- GENERAL ---------- */
+
+body {
+    background-color: #FCFCFC;
+    color: #000;
+    font-family: "Varela Round", Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.5em;
+    vertical-align: middle;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+/* ---------- LOGIN ---------- */
+
+#loginDiv {
+    /*margin: 50px auto;*/
+    width: 355px;
+}
+
+#loginDiv h2 {
+    background-color: #b7d4e4;
+    -webkit-border-radius: 20px 20px 0 0;
+    -moz-border-radius: 20px 20px 0 0;
+    border-radius: 20px 20px 0 0;
+    color: #fff;
+    font-size: 28px;
+    padding: 20px 26px;
+}
+
+#loginDiv h2 span[class*="fontawesome-"] {
+    margin-right: 14px;
+}
+
+#loginDiv fieldset {
+    background-color: #fff;
+    -webkit-border-radius: 0 0 20px 20px;
+    -moz-border-radius: 0 0 20px 20px;
+    border-radius: 0 0 20px 20px;
+    padding: 20px 27px;
+}
+
+#loginDiv fieldset p {
+    margin-bottom: 14px;
+    font-size: 16px;
+}
+
+.loginText {
+    width: 300px;
+    height: 50px;
+    border: 1px solid #BDBDBD;
+    padding: 10px 0 10px 40px;
+}
+
+.fontSize {
+    font-size: 14px;
+}
+
+.fontSize a {
+    color: #666;
+    font-size: 14px;
+    font: 13px/ 18px "宋体", arial, sans-serif;
+}
+
+.fontSize a:hover {
+    color: red;
+}
+
+.pullRight {
+    float: right;
+}
+
+.pullLeft {
+    float: left;
+}
+
+.rightView {
+    text-align: right;
+}
+
+.loginBtn {
+    width: 300px;
+    height: 50px;
+    background-color: #B7D4E4;
+    color: #FFFFFF;
+    font-size: 24px;
+    border: 1px solid;
+}
+
+.codeText {
+    width: 170px;
+    height: 40px;
+    border: 1px solid #BDBDBD;
+    padding: 10px 0 10px 20px;
+}
+
+#username {
+    background:url(../../images/user/user_24.png) no-repeat 0 center;
+    background-position-x: 10px;
+}
+
+#password {
+    background:url(../../images/user/key_24.png) no-repeat 0 center;
+    background-position-x: 10px;
+}
+
+.clearBtn {
+    display: none;
+    left: 320px;
+    padding-top: 15px;
+    position: absolute;
+    cursor: pointer;
+    color: #666666;
+}
+
+.clearBtn:link {
+    text-decoration:none;
+}
+
+.clearBtn:visited {
+    text-decoration: none;
+}
+
+.clearBtn:hover {
+    text-decoration: none;
+}
+
+.clearBtn:active {
+    text-decoration: none;
+}
+
+#checkCodeDiv {
+    display: none;
+}
+
+.msgDiv {
+    display: none;
+    min-height: 29px;
+    width: 300px;
+    border: 1px solid #faccc6;
+    color: #e4393c;
+    background: #ffebeb;
+}
+
+.msgDiv span {
+    background:url(../../images/user/error_16.png) no-repeat 0 center;
+    background-position-x: 10px;
+    vertical-align:middle;
+    font-size: 12px;
+    padding: 10px 0 10px 40px;
+}
