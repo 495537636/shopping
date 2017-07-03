@@ -20,13 +20,18 @@ $(function () {
         var checkFlag = checkForm();
         if (checkFlag) {
             $("#login").text("正在登录...");
+            var username = $.trim($("#username").val());
+            var password = $.trim($("#password").val());
             $.ajax({
-                url: "",
-                data: "",
+                url: "userInfo/login",
+                data: {
+                    "username" : username,
+                    "password" : password
+                },
                 type: "post",
                 async: false,
                 success: function (response) {
-
+                    console.log(response);
                 }
             });
         }

@@ -54,7 +54,7 @@ public class UserInfoController extends BaseController {
         userInfoRequestDTO.setPassword(password);
         try {
             UserInfoResponseDTO userInfoResponseDTO = userInfoService.queryUserInfo(userInfoRequestDTO);
-            if (null == userInfoRequestDTO) {
+            if (null == userInfoResponseDTO) {
                 printJsonMessage(response, "用户名或密码错误");
             }
         }catch (Exception e) {
