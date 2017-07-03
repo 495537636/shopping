@@ -10,7 +10,7 @@
  * @version: V1.0
  */
 
-package com.sunshine.shopping.model.entity;
+package com.sunshine.shopping.model.dto;
 
 import java.io.Serializable;
 

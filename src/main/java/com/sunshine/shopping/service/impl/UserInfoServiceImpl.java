@@ -12,15 +12,16 @@
 
 package com.sunshine.shopping.service.impl;
 
-import com.sunshine.shopping.common.util.ValidateUtil;
-import com.sunshine.shopping.mapper.UserInfoMapper;
-import com.sunshine.shopping.model.dto.UserInfoResponseDTO;
-import com.sunshine.shopping.model.entity.UserInfoEntity;
-import com.sunshine.shopping.model.entity.UserInfoRequestDTO;
-import com.sunshine.shopping.service.UserInfoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.sunshine.shopping.common.util.ValidateUtil;
+import com.sunshine.shopping.mapper.UserInfoMapper;
+import com.sunshine.shopping.model.dto.UserInfoRequestDTO;
+import com.sunshine.shopping.model.dto.UserInfoResponseDTO;
+import com.sunshine.shopping.model.entity.UserInfoEntity;
+import com.sunshine.shopping.service.UserInfoService;
 
 /**
  * @Title: UserInfoServiceImpl

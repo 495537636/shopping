@@ -12,16 +12,17 @@
 
 package com.sunshine.shopping.web;
 
-import com.sunshine.shopping.common.web.BaseController;
-import com.sunshine.shopping.model.dto.UserInfoResponseDTO;
-import com.sunshine.shopping.model.entity.UserInfoRequestDTO;
-import com.sunshine.shopping.service.UserInfoService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.sunshine.shopping.common.web.BaseController;
+import com.sunshine.shopping.model.dto.UserInfoRequestDTO;
+import com.sunshine.shopping.model.dto.UserInfoResponseDTO;
+import com.sunshine.shopping.service.UserInfoService;
 
 /**
  * @Title: UserInfoController

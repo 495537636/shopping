@@ -1,7 +1,7 @@
 package com.sunshine.shopping.service;
 
+import com.sunshine.shopping.model.dto.UserInfoRequestDTO;
 import com.sunshine.shopping.model.dto.UserInfoResponseDTO;
-import com.sunshine.shopping.model.entity.UserInfoRequestDTO;
 
 public interface UserInfoService {
 
