@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <!-- 引入公共头部文件 -->
+    <head>
+        <title>用户注册</title>
+        <!-- 引入公共CSS文件 -->
+        <baseCss th:include="common/baseCss"></baseCss>
+        <link href="resources/css/user/register.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- 引入头部内容 -->
+        <div th:include="common/header"></div>
+        <div class="container" id="app">
+
+        </div>
+        <!-- 引入底部内容 -->
+        <footer th:include="common/footer"></footer>
+        <!-- 引入公共JS文件 -->
+        <baseJs th:include="common/baseJs"></baseJs>
+        <script type="text/javascript" src="resources/js/user/register.js"></script>
+    </body>
+</html>

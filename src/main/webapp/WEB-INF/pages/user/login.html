@@ -5,12 +5,12 @@
     <head>
         <title>用户登录</title>
         <!-- 引入公共CSS文件 -->
-        <baseCss th:include="baseCss"></baseCss>
+        <baseCss th:include="common/baseCss"></baseCss>
         <link href="resources/css/user/login.css" rel="stylesheet" />
     </head>
     <body>
         <!-- 引入头部内容 -->
-        <div th:include="header"></div>
+        <div th:include="common/header"></div>
         <div class="container" id="app">
             <div class="row">
                 <div class="col-md-8">
@@ -84,7 +84,7 @@
                                 <div class="fontSize pullRight">
                                     <a href="javascript:;" id="forgetPassword">忘记密码</a>
                                     &nbsp;&nbsp;
-                                    <a href="javascript:;" id="register">用户注册</a>
+                                    <a href="register.html" id="register">用户注册</a>
                                 </div>
                             </fieldset>
                         </form>
@@ -94,9 +94,9 @@
             </div>
         </div>
         <!-- 引入底部内容 -->
-        <footer th:include="footer"></footer>
+        <footer th:include="common/footer"></footer>
         <!-- 引入公共JS文件 -->
-        <baseJs th:include="baseJs"></baseJs>
+        <baseJs th:include="common/baseJs"></baseJs>
         <script type="text/javascript" src="resources/js/user/login.js"></script>
     </body>
 </html>

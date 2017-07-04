@@ -6,18 +6,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <!-- 引入公共CSS文件 -->
-        <baseCss th:include="baseCss"></baseCss>
+        <baseCss th:include="common/baseCss"></baseCss>
     </head>
     <body>
         <!-- 引入头部内容 -->
-        <div th:include="header"></div>
+        <div th:include="common/header"></div>
 
         <a href="login.html" class="btn btn-primary">登录</a>
 
         <!-- 引入公共JS文件 -->
-        <baseJs th:include="baseJs"></baseJs>
+        <baseJs th:include="common/baseJs"></baseJs>
         <!-- 引入底部内容 -->
-        <footer th:include="footer"></footer>
+        <footer th:include="common/footer"></footer>
         <script>
             $(function () {
                 $("#title").html("全得利-网上购物商城");

@@ -15,6 +15,9 @@ package com.sunshine.shopping.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sunshine.shopping.response.ResponseExceptionUtil;
+import com.sunshine.shopping.response.ResponseResult;
+import com.sunshine.shopping.response.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +26,7 @@ import com.sunshine.shopping.common.web.BaseController;
 import com.sunshine.shopping.model.dto.UserInfoRequestDTO;
 import com.sunshine.shopping.model.dto.UserInfoResponseDTO;
 import com.sunshine.shopping.service.UserInfoService;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @Title: UserInfoController
@@ -46,8 +50,9 @@ public class UserInfoController extends BaseController {
      * @date 2017/7/3 16:36
      * @see [类、类#方法、类#成员]
      */
+    @ResponseBody
     @RequestMapping("login")
-    public void login(HttpServletRequest request, HttpServletResponse response) {
+    public ResponseResult<UserInfoResponseDTO> login(HttpServletRequest request, HttpServletResponse response) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         UserInfoRequestDTO userInfoRequestDTO = new UserInfoRequestDTO();
@@ -56,11 +61,12 @@ public class UserInfoController extends BaseController {
         try {
             UserInfoResponseDTO userInfoResponseDTO = userInfoService.queryUserInfo(userInfoRequestDTO);
             if (null == userInfoResponseDTO) {
-                printJsonMessage(response, "用户名或密码错误");
+                return ResponseUtil.error("0001", "用户名或密码错误");
             }
+            return ResponseUtil.success(userInfoResponseDTO);
         }catch (Exception e) {
             LOGGER.error("用户登录异常,异常信息:{}", e.getMessage(), e);
-            printJsonMessage(response, e.getMessage());
+            return ResponseExceptionUtil.handleException(e);
         }
     }
 

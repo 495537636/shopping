@@ -25,17 +25,25 @@ $(function () {
             $.ajax({
                 url: "userInfo/login",
                 data: {
-                    "username" : username,
-                    "password" : password
+                    "username": username,
+                    "password": password
                 },
                 type: "post",
-                async: false,
                 success: function (response) {
-                    console.log(response);
+                    var code = response.code;
+                    if ('0000' == code) {
+                        // 登录成功，跳转到首页
+                        window.location.href = "index.html";
+                    } else {
+                        // 登录失败
+                        $("#login").text("登录");
+                        $(".msgDiv").show();
+                        $("#errorMsg").html(response.msg);
+                    }
                 }
             });
         }
-    })
+    });
 
 });
 

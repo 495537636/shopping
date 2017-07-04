@@ -1,7 +1,10 @@
 package com.sunshine.shopping.config;
 
+import com.sunshine.shopping.interceptor.ShoppingInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -51,9 +54,20 @@ public class DispatcherConfig extends WebMvcConfigurerAdapter {
 	 */
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
+		// 跳转到主页
 		registry.addViewController("/").setViewName("/index");
+		// 跳转到主页
+		registry.addViewController("/index.html").setViewName("/index");
+		// 跳转到错误页
+		registry.addViewController("/error").setViewName("/common/error");
+		// 跳转到登录页
 		registry.addViewController("/toLogin").setViewName("/user/login");
+		// 跳转到登录页
 		registry.addViewController("/login.html").setViewName("/user/login");
+		// 跳转到注册页
+		registry.addViewController("/toRegister").setViewName("user/register");
+		// 跳转到注册页
+		registry.addViewController("/register.html").setViewName("user/register");
 	}
 
 	/**
@@ -62,6 +76,16 @@ public class DispatcherConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+	}
+
+	/**
+	 * 添加拦截器
+	 */
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		HandlerInterceptor interceptor = new ShoppingInterceptor();
+		registry.addInterceptor(interceptor).addPathPatterns("/order/*");
+		super.addInterceptors(registry);
 	}
 
 }
