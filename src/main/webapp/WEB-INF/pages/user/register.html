@@ -12,7 +12,25 @@
         <!-- 引入头部内容 -->
         <div th:include="common/header"></div>
         <div class="container" id="app">
-
+            <div class="main">
+                <div class="formDir">
+                    <form>
+                        <p>
+                            <input type="text" id="username" name="username" placeholder="用户名/手机号" class="registerText" />
+                        </p>
+                        <p>
+                        <div class="msgDiv">
+                            <span class="warning" id="usernameRole">
+                                阿斯蒂芬
+                            </span>
+                        </div>
+                        </p>
+                        <p>
+                            <input type="text" id="aaa" name="username" placeholder="用户名/手机号" class="registerText" />
+                        </p>
+                    </form>
+                </div>
+            </div>
         </div>
         <!-- 引入底部内容 -->
         <footer th:include="common/footer"></footer>
