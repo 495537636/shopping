@@ -66,14 +66,6 @@ body {
     color: red;
 }
 
-.pullRight {
-    float: right;
-}
-
-.pullLeft {
-    float: left;
-}
-
 .rightView {
     text-align: right;
 }

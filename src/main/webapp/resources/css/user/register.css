@@ -11,10 +11,10 @@ body {
 .main {
     margin: 50px auto 30px;
     width: 800px;
-    box-shadow: 0 0 5px #C7C5C5;
+    box-shadow: 0 0 20px #C7C5C5;
     padding: 50px 50px 50px 50px;
-    border-radius: 5px;
-    background-color: #FAFBFC;
+    border-radius: 10px;
+    background-color: #FCFCFC;
 }
 
 .formDir {
@@ -32,13 +32,31 @@ body {
 .msgDiv {
     min-height: 29px;
     width: 400px;
+    visibility: hidden;
 }
 
 .warning {
-    background: url("../../images/warning_16-2.png") no-repeat 0 center;
+    margin: 0;
+    background: url("../../images/user/warning_16-2.png") no-repeat 0 center;
     background-position-x: 0px;
     vertical-align:middle;
     font-size: 12px;
     padding: 10px 0 10px 20px;
     text-align: left;
+    color: #757575;
 }
+
+.registerBtn {
+    width: 400px;
+    height: 50px;
+    background-color: #B7D4E4;
+    color: #FFFFFF;
+    font-size: 24px;
+    border: 1px solid;
+}
+.codeText {
+     width: 265px;
+     height: 50px;
+     border: 1px solid #BDBDBD;
+     padding: 10px 0 10px 40px;
+ }
