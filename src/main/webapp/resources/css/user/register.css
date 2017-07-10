@@ -35,11 +35,11 @@ body {
     visibility: hidden;
 }
 
-.warning {
+.msgDiv span {
     margin: 0;
     background: url("../../images/user/warning_16-2.png") no-repeat 0 center;
     background-position-x: 0px;
-    vertical-align:middle;
+    vertical-align: middle;
     font-size: 12px;
     padding: 10px 0 10px 20px;
     text-align: left;
@@ -54,9 +54,11 @@ body {
     font-size: 24px;
     border: 1px solid;
 }
+
 .codeText {
-     width: 265px;
-     height: 50px;
-     border: 1px solid #BDBDBD;
-     padding: 10px 0 10px 40px;
- }
+    width: 265px;
+    height: 50px;
+    border: 1px solid #BDBDBD;
+    padding: 10px 0 10px 40px;
+    visibility: visible;
+}

@@ -14,6 +14,11 @@ $(function () {
         $(this).css("display", "none");
     });
 
+    // 刷新验证码
+    $("#changeCode").click(function () {
+        $(this).find("img").attr("src", "userInfo/getCaptchaImage?random="+Math.random());
+    });
+
     // 绑定登录按钮事件
     $("#login").click(function () {
         $(".msgDiv").hide();

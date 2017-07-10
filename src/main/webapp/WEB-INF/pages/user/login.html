@@ -54,7 +54,7 @@
                 <div class="col-md-4">
                     <!-- start login -->
                     <div id="loginDiv">
-                        <h2><span class="fontawesome-lock"></span>登录</h2>
+                        <h2><span class="fontawesome-lock"></span>用户登录</h2>
                         <form action="javascript:void(0);" method="POST">
                             <fieldset>
                                 <div class="msgDiv">
@@ -63,22 +63,26 @@
                                 <p></p>
                                 <p>
                                     <a class="clearBtn" href="javascript:;">X</a>
-                                    <input type="text" id="username" name="username" placeholder="用户名/手机号" class="loginText" />
+                                    <input type="text" id="username" name="username" placeholder="用户名/手机号" class="form-control loginText" />
                                 </p>
                                 <p>
                                     <a class="clearBtn" href="javascript:;">X</a>
-                                    <input type="password" id="password" name="password" placeholder="密码" class="loginText" />
+                                    <input type="password" id="password" name="password" placeholder="密码" class="form-control loginText" />
                                 </p>
                                 <p>
-                                    <div id="checkCodeDiv">
-                                        <input type="text" id="checkCode" name="checkCode" placeholder="验证码" class="codeText pullLeft" />
-                                        <img src="http://image.loving1314.com/filestore/loginPage/code.jpg"
-                                             title="看不清，换一张" class="pullRight" />
+                                    <div class="input-group" style="width: 300px !important;">
+                                        <input type="text" id="checkCode" name="checkCode" class="form-control codeText" placeholder="请输入验证码" />
+                                        <div class="input-group-addon" style="padding: 0 0 0 0;">
+                                            <a href="javascript:;" id="changeCode">
+                                                <img src="userInfo/getCaptchaImage"
+                                                     title="看不清，换一张" />
+                                            </a>
+                                        </div>
                                     </div>
                                 </p>
                                 <p>
                                     <div>
-                                        <button class="loginBtn" id="login">登&nbsp;&nbsp;&nbsp;&nbsp;录</button>
+                                        <button class="loginBtn" id="login">登&nbsp;&nbsp;录</button>
                                     </div>
                                 </p>
                                 <div class="fontSize pullRight">

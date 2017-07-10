@@ -18,6 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.sunshine.shopping.response.ResponseExceptionUtil;
 import com.sunshine.shopping.response.ResponseResult;
 import com.sunshine.shopping.response.ResponseUtil;
+import com.sunshine.shopping.util.CaptchaUtil;
+import com.sunshine.shopping.util.CookieUtil;
+import com.sunshine.shopping.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +46,12 @@ public class UserInfoController extends BaseController {
     @Autowired
     private UserInfoService userInfoService;
 
+    @RequestMapping("toLogin")
+    public String toLogin(HttpServletRequest request, HttpServletResponse response) {
+        request.getSession(true);
+        return "/user/login";
+    }
+
     /**
      * @Title: login
      * @Description: 用户登录方法
@@ -67,6 +76,26 @@ public class UserInfoController extends BaseController {
         }catch (Exception e) {
             LOGGER.error("用户登录异常,异常信息:{}", e.getMessage(), e);
             return ResponseExceptionUtil.handleException(e);
+        }
+    }
+
+    /**
+     * @Title: getCaptchaImage
+     * @Description: 获取图片验证码
+     * @author LiMG
+     * @date 2017/7/10 15:23
+     * @see [类、类#方法、类#成员]
+     */
+    @RequestMapping("getCaptchaImage")
+    public void getCaptchaImage(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            String sessionId = CookieUtil.getCookieValue(request, "JSESSIONID");
+            String code = CaptchaUtil.generateVerifyCode(4);
+            RedisUtil.set("checkCode", code);
+            CaptchaUtil.getCaptcha(request, response, 130, 48, code);
+        }catch (Exception e){
+            LOGGER.error("获取图片验证码异常,异常信息:{}", e.getMessage(), e);
+            e.printStackTrace();
         }
     }
 
