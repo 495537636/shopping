@@ -55,7 +55,7 @@ public class DispatcherConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		// 跳转到主页
-		registry.addViewController("/").setViewName("/index");
+		//registry.addViewController("/").setViewName("/index");
 		// 跳转到主页
 		registry.addViewController("/index.html").setViewName("/index");
 		// 跳转到错误页

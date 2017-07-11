@@ -12,24 +12,27 @@
 
 package com.sunshine.shopping.web;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.sunshine.shopping.response.ResponseExceptionUtil;
-import com.sunshine.shopping.response.ResponseResult;
-import com.sunshine.shopping.response.ResponseUtil;
-import com.sunshine.shopping.util.CaptchaUtil;
-import com.sunshine.shopping.util.CookieUtil;
-import com.sunshine.shopping.util.RedisUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.sunshine.shopping.common.web.BaseController;
 import com.sunshine.shopping.model.dto.UserInfoRequestDTO;
 import com.sunshine.shopping.model.dto.UserInfoResponseDTO;
+import com.sunshine.shopping.response.ResponseExceptionUtil;
+import com.sunshine.shopping.response.ResponseResult;
+import com.sunshine.shopping.response.ResponseUtil;
 import com.sunshine.shopping.service.UserInfoService;
+import com.sunshine.shopping.util.CaptchaUtil;
+import com.sunshine.shopping.util.CookieUtil;
+import com.sunshine.shopping.util.RedisUtil;
+import com.sunshine.shopping.util.StaticUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import static com.sunshine.shopping.response.ResponseCode.UserCode.*;
 
 /**
  * @Title: UserInfoController
@@ -45,12 +48,6 @@ public class UserInfoController extends BaseController {
 
     @Autowired
     private UserInfoService userInfoService;
-
-    @RequestMapping("toLogin")
-    public String toLogin(HttpServletRequest request, HttpServletResponse response) {
-        request.getSession(true);
-        return "/user/login";
-    }
 
     /**
      * @Title: login
@@ -70,7 +67,22 @@ public class UserInfoController extends BaseController {
         try {
             UserInfoResponseDTO userInfoResponseDTO = userInfoService.queryUserInfo(userInfoRequestDTO);
             if (null == userInfoResponseDTO) {
-                return ResponseUtil.error("0001", "用户名或密码错误");
+                String key = StaticUtil.USER_ERROR_COUNT + username;
+                // 用户名或密码错误
+                String value = RedisUtil.get(key);
+                if (StringUtils.isNotEmpty(value)) {
+                    int errorCount = Integer.parseInt(value);
+                    RedisUtil.set(key, String.valueOf(errorCount + 1), 600);
+                    if (errorCount >= 2) {
+                        // 登录错误3次，页面展示验证码
+                        return  ResponseUtil.error(USER_CERTIFICATE_ERROR_THREE.getCode(), USER_CERTIFICATE_ERROR_THREE.getMsg());
+                    } else {
+                        return ResponseUtil.error(USER_CERTIFICATE_ERROR.getCode(), USER_CERTIFICATE_ERROR.getMsg());
+                    }
+                } else {
+                    RedisUtil.set(key, "1", 600);
+                }
+                return ResponseUtil.error(USER_CERTIFICATE_ERROR.getCode(), USER_CERTIFICATE_ERROR.getMsg());
             }
             return ResponseUtil.success(userInfoResponseDTO);
         }catch (Exception e) {
@@ -91,7 +103,8 @@ public class UserInfoController extends BaseController {
         try {
             String sessionId = CookieUtil.getCookieValue(request, "JSESSIONID");
             String code = CaptchaUtil.generateVerifyCode(4);
-            RedisUtil.set("checkCode", code);
+            // 10分钟有效期缓存
+            RedisUtil.set("CHECK_CODE_" + sessionId, code, 600);
             CaptchaUtil.getCaptcha(request, response, 130, 48, code);
         }catch (Exception e){
             LOGGER.error("获取图片验证码异常,异常信息:{}", e.getMessage(), e);

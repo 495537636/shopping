@@ -12,9 +12,13 @@
 
 package com.sunshine.shopping.common.web;
 
+import com.sunshine.shopping.util.CookieUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -26,6 +30,7 @@ import java.io.IOException;
  * @see  [相关类/方法]
  * @since [产品/模块版本]
  */
+@Controller
 public class BaseController {
 
     public static Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
@@ -41,6 +46,22 @@ public class BaseController {
         } catch (IOException e) {
             LOGGER.error("输出信息异常,异常信息:{}", e.getMessage(), e);
         }
+    }
+
+    /**
+     * @Title: toHome
+     * @Description: 跳转到主页
+     * @author LiMG
+     * @date 2017/7/11 13:44
+     * @see [类、类#方法、类#成员]
+     */
+    @RequestMapping("/")
+    public String toHome(HttpServletRequest request, HttpServletResponse response) {
+        // 开启session，会生成JSESSIONID并传到前台，同时放入Cookie中
+        request.getSession(true);
+        String sessiongId = request.getSession().getId();
+        CookieUtil.setCookie(response, "QDL_SESSION", sessiongId, 30, "www.loving1314.com", null);
+        return "index";
     }
 
 }

@@ -44,6 +44,11 @@ $(function () {
                         $("#login").text("登录");
                         $(".msgDiv").show();
                         $("#errorMsg").html(response.msg);
+                        console.log(code);
+                        if ('0002' == code) {
+                            $("#changeCode").find("img").attr("src", "userInfo/getCaptchaImage?random="+Math.random());
+                            $("#checkCodeDiv").show();
+                        }
                     }
                 }
             });

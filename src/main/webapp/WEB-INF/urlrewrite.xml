@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 2.6//EN"
+"http://tuckey.org/res/dtds/urlrewrite2.6.dtd">
+<urlrewrite>
+	<!--
+		rule中参数说明：
+			from:浏览器展示的请求地址
+			to:实际后台所请求处理的地址
+	 -->
+</urlrewrite>

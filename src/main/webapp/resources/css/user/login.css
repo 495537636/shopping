@@ -27,6 +27,7 @@ body {
     font-size: 28px;
     padding: 20px 26px;
     font-weight: 700;
+    margin-bottom: 0px !important;
 }
 
 #loginDiv h2 span[class*="fontawesome-"] {
@@ -83,7 +84,7 @@ body {
 .codeText {
     height: 50px;
     border: 1px solid #BDBDBD;
-    padding: 10px 0 10px 20px;
+    padding: 10px 0 10px 40px;
 }
 
 #username {
@@ -97,9 +98,12 @@ body {
 }
 
 .clearBtn {
+    background: url("../../images/user/clear_32.png") no-repeat 0 center;
+    width: 32px;
+    height: 16px;
     display: none;
-    left: 320px;
-    padding-top: 15px;
+    left: 305px;
+    padding-top: 50px;
     position: absolute;
     cursor: pointer;
     color: #666666;
@@ -140,4 +144,11 @@ body {
     vertical-align:middle;
     font-size: 12px;
     padding: 10px 0 10px 40px;
+}
+
+#checkCodeDiv {
+    display: none;
+}
+
+.clearImg {
 }
