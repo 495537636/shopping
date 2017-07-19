@@ -109,6 +109,7 @@ var app = new Vue({
 function checkForm() {
     var username = $.trim($("#username").val());
     var password = $.trim($("#password").val());
+    var checkCode = $.trim($("#checkCode").val());
     var showFlag = $("#checkCodeDiv").css("display");
     if (username.length == 0 && password.length == 0) {
         shakeText($("#username"));
@@ -125,6 +126,13 @@ function checkForm() {
         shakeText($("#password"));
         showMessage(2);
         return false;
+    }
+    if (showFlag == 'block') {
+        if (checkCode.length == 0) {
+            shakeText($("#checkCodeDiv"));
+            showMessage(4);
+            return false;
+        }
     }
     return true;
 }
@@ -150,6 +158,9 @@ function showMessage(flag) {
     }
     if (3 == flag) {
         html = "请输入用户名和密码";
+    }
+    if (4 == flag) {
+        html = "请输入验证码"
     }
     $("#errorMsg").html(html);
 }
