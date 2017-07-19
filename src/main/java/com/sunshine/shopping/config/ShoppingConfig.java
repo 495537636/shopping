@@ -15,7 +15,11 @@ package com.sunshine.shopping.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -39,7 +43,10 @@ import java.io.IOException;
 @Configuration
 @EnableWebMvc
 @ComponentScan("com.sunshine.shopping")
-public class ShoppingConfig {
+public class ShoppingConfig implements ApplicationContextAware {
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     /**
      * 配置数据源
@@ -97,4 +104,8 @@ public class ShoppingConfig {
         return manager;
     }
 
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
 }

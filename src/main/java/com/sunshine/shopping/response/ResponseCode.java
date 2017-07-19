@@ -27,7 +27,9 @@ public class ResponseCode {
         USER_CERTIFICATE_ERROR("0001", "用户名或密码错误"),
         // 用户名或密码错误3次，页面展示验证码
         USER_CERTIFICATE_ERROR_THREE("0002", "用户名或密码错误"),
-        USER_CHECKCODE_TIMEOUT("0003", "验证码过期");
+        USER_CHECKCODE_TIMEOUT("0003", "验证码过期"),
+        USER_CHECKCODE_EMPTY("0004", "请输入验证码"),
+        USER_CHECKCODE_ERROR("0005", "验证码错误");
 
         private String code;
         private String msg;

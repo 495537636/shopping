@@ -30,6 +30,10 @@ public class ResponseExceptionUtil {
 
     public static Logger logger = LoggerFactory.getLogger(ResponseExceptionUtil.class);
 
+    public static <T> ResponseResult<T> handleException(String msg) {
+        return handleException(msg, null);
+    }
+
     public static <T> ResponseResult<T> handleException(Exception e) {
         return handleException("", e);
     }

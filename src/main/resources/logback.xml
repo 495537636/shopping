@@ -10,7 +10,7 @@
 			<pattern>logbak: %d{HH:mm:ss.SSS} %logger{36} - %msg%n</pattern>
 		</encoder>
 	</appender>
-<!-- 	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
              <level>DEBUG</level>
              <onMatch>ACCEPT</onMatch>
@@ -27,7 +27,7 @@
              <pattern>%date [%thread] %-5level %logger{80} - %msg%n</pattern>
          </encoder>
 	</appender>
- -->	<!-- 
+	<!--
 		将org.springframework.web包下的类的日志级别设置为DEBUG，
 		开发SpringMVC经常出现和参数类型相关的4XX错误，
 		设置此项会看到更详细的错误信息

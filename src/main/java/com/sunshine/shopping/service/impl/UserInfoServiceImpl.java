@@ -60,4 +60,26 @@ public class UserInfoServiceImpl implements UserInfoService {
             return null;
         }
     }
+
+    /** 
+     * @Title: queryUserInfoByUsername
+     * @Description: 根据用户名获取用户信息详情
+     * @author LiMG
+     * @date 2017/7/12 16:21 
+     * @see [类、类#方法、类#成员]
+     */
+    @Override
+    public UserInfoResponseDTO queryUserInfoByUsername(String username) throws Exception {
+        ValidateUtil.paramRequired(username, "用户名不能为空");
+        UserInfoEntity queryEntity = new UserInfoEntity();
+        queryEntity.setUsername(username);
+        UserInfoEntity userInfo = userInfoMapper.query(queryEntity);
+        UserInfoResponseDTO userInfoResponseDTO = new UserInfoResponseDTO();
+        if (null != userInfo) {
+            BeanUtils.copyProperties(userInfo, userInfoResponseDTO);
+            return userInfoResponseDTO;
+        } else {
+            return null;
+        }
+    }
 }

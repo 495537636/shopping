@@ -25,4 +25,10 @@ public class StaticUtil {
     // 用户登录错误次数前缀
     public static final String USER_ERROR_COUNT =  "USER_ERROR_COUNT_";
 
+    // 用户登录状态标识
+    public static final String USER_LOGIN_FLAG = "USER_LOGIN_FLAG_";
+
+    // sessionId标识
+    public static final String USER_LOGIN_CHECK_CODE = "USER_LOGIN_CHECK_CODE_";
+
 }

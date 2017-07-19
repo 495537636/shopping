@@ -65,10 +65,22 @@ public class UserInfoController extends BaseController {
         userInfoRequestDTO.setUsername(username);
         userInfoRequestDTO.setPassword(password);
         try {
+            String sessionId = CookieUtil.getCookieValue(request, "JSESSIONID");
+            String redisCheckCode = RedisUtil.get(StaticUtil.USER_LOGIN_CHECK_CODE + sessionId);
+            if (StringUtils.isNotEmpty(redisCheckCode)) {
+                // 校验验证码正确性
+                String checkCode = request.getParameter("checkCode");
+                if (StringUtils.isEmpty(checkCode)) {
+                    return ResponseUtil.error(USER_CHECKCODE_EMPTY.getCode(), USER_CHECKCODE_EMPTY.getMsg());
+                }
+                if (!checkCode.toLowerCase().equals(redisCheckCode.toLowerCase())) {
+                    return ResponseUtil.error(USER_CHECKCODE_ERROR.getCode(), USER_CHECKCODE_ERROR.getMsg());
+                }
+            }
             UserInfoResponseDTO userInfoResponseDTO = userInfoService.queryUserInfo(userInfoRequestDTO);
             if (null == userInfoResponseDTO) {
-                String key = StaticUtil.USER_ERROR_COUNT + username;
                 // 用户名或密码错误
+                String key = StaticUtil.USER_ERROR_COUNT + username;
                 String value = RedisUtil.get(key);
                 if (StringUtils.isNotEmpty(value)) {
                     int errorCount = Integer.parseInt(value);
@@ -84,11 +96,40 @@ public class UserInfoController extends BaseController {
                 }
                 return ResponseUtil.error(USER_CERTIFICATE_ERROR.getCode(), USER_CERTIFICATE_ERROR.getMsg());
             }
+            // 登录成功，保存用户登录标识到redis
+            String loginKey = StaticUtil.USER_LOGIN_FLAG + userInfoResponseDTO.getUserId();
+            // 登录状态保持1小时
+            RedisUtil.set(loginKey, "true", 3600);
             return ResponseUtil.success(userInfoResponseDTO);
         }catch (Exception e) {
             LOGGER.error("用户登录异常,异常信息:{}", e.getMessage(), e);
-            return ResponseExceptionUtil.handleException(e);
+            return ResponseUtil.error("0001", "登录失败，请稍后重试");
         }
+    }
+
+    /** 
+     * @Title: checkUsername
+     * @Description: 校验用户名
+     * @author LiMG
+     * @date 2017/7/19 16:57 
+     * @see [类、类#方法、类#成员]
+     */
+    @ResponseBody
+    @RequestMapping("checkSessionId")
+    public ResponseResult<Boolean> checkSessionId(HttpServletRequest request, HttpServletResponse response) {
+        String sessionId = CookieUtil.getCookieValue(request, "JSESSIONID");
+        if (null == sessionId) {
+            return null;
+        }
+        String key = StaticUtil.USER_LOGIN_CHECK_CODE + sessionId;
+        String value = RedisUtil.get(key);
+        if (null == value) {
+            return ResponseUtil.success(false);
+        }
+        if (Integer.parseInt(value) >= 3) {
+            return ResponseUtil.success(true);
+        }
+        return ResponseUtil.success(false);
     }
 
     /**
@@ -104,7 +145,7 @@ public class UserInfoController extends BaseController {
             String sessionId = CookieUtil.getCookieValue(request, "JSESSIONID");
             String code = CaptchaUtil.generateVerifyCode(4);
             // 10分钟有效期缓存
-            RedisUtil.set("CHECK_CODE_" + sessionId, code, 600);
+            RedisUtil.set(StaticUtil.USER_LOGIN_CHECK_CODE + sessionId, code, 600);
             CaptchaUtil.getCaptcha(request, response, 130, 48, code);
         }catch (Exception e){
             LOGGER.error("获取图片验证码异常,异常信息:{}", e.getMessage(), e);

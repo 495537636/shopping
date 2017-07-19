@@ -3,9 +3,14 @@ $(function () {
     $("#title").html("欢迎登录");
 
     // 绑定输入内容改变事件
-    $(".loginText").keydown(function () {
+    $(".loginText").keyup(function () {
         $(this).css("border", "1px solid #BDBDBD");
-        $(this).parent().find("a").css("display", "inline");
+        var value = $.trim($(this).val());
+        if (value.length != 0) {
+            $(this).parent().find("a").css("display", "inline");
+        } else {
+            $(this).parent().find("a").css("display", "none");
+        }
     });
 
     // 绑定清除文本框内容事件
@@ -19,6 +24,25 @@ $(function () {
         $(this).find("img").attr("src", "userInfo/getCaptchaImage?random="+Math.random());
     });
 
+    // 用户名失去焦点事件
+    $("#username").blur(function () {
+        var value = $.trim($(this).val());
+        $.ajax({
+            url : "userInfo/checkUsername",
+            data : {
+                "username" : value
+            },
+            success: function (data) {
+                var result = data.data;
+                if (result) {
+                    showCheckCode();
+                } else {
+                    hideCheckCode();
+                }
+            }
+        });
+    });
+
     // 绑定登录按钮事件
     $("#login").click(function () {
         $(".msgDiv").hide();
@@ -27,11 +51,13 @@ $(function () {
             $("#login").text("正在登录...");
             var username = $.trim($("#username").val());
             var password = $.trim($("#password").val());
+            var checkCode = $.trim($("#checkCode").val());
             $.ajax({
                 url: "userInfo/login",
                 data: {
                     "username": username,
-                    "password": password
+                    "password": password,
+                    "checkCode" : checkCode
                 },
                 type: "post",
                 success: function (response) {
@@ -43,11 +69,11 @@ $(function () {
                         // 登录失败
                         $("#login").text("登录");
                         $(".msgDiv").show();
+                        $("#password").val('');
                         $("#errorMsg").html(response.msg);
                         console.log(code);
                         if ('0002' == code) {
-                            $("#changeCode").find("img").attr("src", "userInfo/getCaptchaImage?random="+Math.random());
-                            $("#checkCodeDiv").show();
+                            showCheckCode();
                         }
                     }
                 }
@@ -74,7 +100,7 @@ var app = new Vue({
             this.$http.post('image/queryLoginImageList', this.imageInfo, {emulateJSON: true}).then(function (response) {
                 this.dataList = response.data.data;
             }, function (response) {
-                console.log(response)
+                console.log(response);
             });
         }
     }
@@ -83,6 +109,7 @@ var app = new Vue({
 function checkForm() {
     var username = $.trim($("#username").val());
     var password = $.trim($("#password").val());
+    var showFlag = $("#checkCodeDiv").css("display");
     if (username.length == 0 && password.length == 0) {
         shakeText($("#username"));
         shakeText($("#password"));
@@ -125,4 +152,15 @@ function showMessage(flag) {
         html = "请输入用户名和密码";
     }
     $("#errorMsg").html(html);
+}
+
+// 显示验证码
+function showCheckCode() {
+    $("#changeCode").find("img").attr("src", "userInfo/getCaptchaImage?random="+Math.random());
+    $("#checkCodeDiv").show();
+}
+
+// 隐藏验证码
+function hideCheckCode() {
+    $("#checkCodeDiv").hide();
 }
