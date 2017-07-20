@@ -88,22 +88,22 @@ body {
 }
 
 #username {
-    background:url(../../images/user/user_24.png) no-repeat 0 center;
+    background:url(../../images/user/user_blue_24.png) no-repeat 0 center;
     background-position-x: 10px;
 }
 
 #password {
-    background:url(../../images/user/key_24.png) no-repeat 0 center;
+    background:url(../../images/user/lock_blue_24.png) no-repeat 0 center;
     background-position-x: 10px;
 }
 
 #checkCode {
-    background:url(../../images/user/check_24.png) no-repeat 0 center;
+    background:url(../../images/user/code_blue_24.png) no-repeat 0 center;
     background-position-x: 10px;
 }
 
 .clearBtn {
-    background: url("../../images/user/clear_32.png") no-repeat 0 center;
+    background: url("../../images/user/clear_blue_24.png") no-repeat 0 center;
     width: 32px;
     height: 16px;
     display: none;

@@ -14,65 +14,62 @@
         <div class="container" id="app">
             <div class="main">
                 <div class="formDir">
-                    <form>
-                        <div>
-                            <input type="text" id="username" name="username" placeholder="请输入用户名" class="form-control registerText" />
-                            <div class="msgDiv">
-                                <span id="usernameRole">
-                                    支持中文、字母、英文的组合，4-20个字符
-                                </span>
+                    <div>
+                        <input type="text" id="username" name="username" placeholder="请输入用户名" class="form-control registerText" />
+                        <div class="msgDiv">
+                            <span id="usernameRole">
+                                支持中文、字母、英文的组合，4-20个字符
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <input type="password" id="password" name="password" placeholder="请输入密码" class="form-control registerText" />
+                        <div class="msgDiv">
+                            <span id="passwordRole">
+                                建议使用字母、数字和符号两种及以上的组合，6-20个字符
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <input type="password" id="repassword" name="repassword" placeholder="请输入确认密码" class="form-control registerText" />
+                        <div class="msgDiv">
+                            <span id="repasswordRole">
+                                请再次输入密码
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <input type="text" id="phone" name="phone" placeholder="请输入手机号" class="form-control registerText" />
+                        <div class="msgDiv">
+                            <span id="phoneRole">
+                                完成验证后,你可以用该手机登录和找回密码
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input-group">
+                            <input type="text" id="checkCode" name="checkCode" class="form-control codeText" placeholder="请输入验证码" />
+                            <div class="input-group-addon" style="padding: 0 0 0 0;">
+                                <a href="javascript:;" id="changeCode">
+                                    <img src="" title="看不清，换一张" />
+                                </a>
                             </div>
                         </div>
-                        <div>
-                            <input type="password" id="password" name="password" placeholder="请输入密码" class="form-control registerText" />
-                            <div class="msgDiv">
-                                <span id="passwordRole">
-                                    建议使用字母、数字和符号两种及以上的组合，6-20个字符
-                                </span>
-                            </div>
+                        <div class="msgDiv">
+                            <span id="checkCodeRole">
+                                完成验证后,你可以用该手机登录和找回密码
+                            </span>
                         </div>
-                        <div>
-                            <input type="password" id="repassword" name="repassword" placeholder="请输入确认密码" class="form-control registerText" />
-                            <div class="msgDiv">
-                                <span id="repasswordRole">
-                                    请再次输入密码
-                                </span>
-                            </div>
+                    </div>
+                    <div>
+                        <input type="text" id="phoneCode" name="phoneCode" placeholder="请输入手机验证码" class="form-control registerText" />
+                        <div class="msgDiv">
+                            <span id="phoneCodeRole">
+                                完成验证后,你可以用该手机登录和找回密码
+                            </span>
                         </div>
-                        <div>
-                            <input type="text" id="phone" name="phone" placeholder="请输入手机号" class="form-control registerText" />
-                            <div class="msgDiv">
-                                <span id="phoneRole">
-                                    完成验证后,你可以用该手机登录和找回密码
-                                </span>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="input-group">
-                                <input type="text" id="checkCode" name="checkCode" class="form-control codeText" placeholder="请输入验证码" />
-                                <div class="input-group-addon" style="padding: 0 0 0 0;">
-                                    <a href="javascript:;">
-                                        <img src="http://image.loving1314.com/filestore/loginPage/code.jpg"
-                                             title="看不清，换一张" />
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="msgDiv">
-                                <span id="checkCodeRole">
-                                    完成验证后,你可以用该手机登录和找回密码
-                                </span>
-                            </div>
-                        </div>
-                        <div>
-                            <input type="text" id="phoneCode" name="phoneCode" placeholder="请输入手机验证码" class="form-control registerText" />
-                            <div class="msgDiv">
-                                <span id="phoneCodeRole">
-                                    完成验证后,你可以用该手机登录和找回密码
-                                </span>
-                            </div>
-                        </div>
-                        <button class="registerBtn" id="register">注&nbsp;&nbsp;&nbsp;&nbsp;册</button>
-                    </form>
+                    </div>
+                    <button class="registerBtn" id="register">注&nbsp;&nbsp;&nbsp;&nbsp;册</button>
                 </div>
             </div>
         </div>

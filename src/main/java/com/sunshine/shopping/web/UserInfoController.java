@@ -65,7 +65,7 @@ public class UserInfoController extends BaseController {
         userInfoRequestDTO.setUsername(username);
         userInfoRequestDTO.setPassword(password);
         try {
-            String sessionId = CookieUtil.getCookieValue(request, "JSESSIONID");
+            String sessionId = getSessiongId(request);
             String redisCheckCode = RedisUtil.get(StaticUtil.USER_LOGIN_CHECK_CODE + sessionId);
             if (StringUtils.isNotEmpty(redisCheckCode)) {
                 // 校验验证码正确性
@@ -80,7 +80,7 @@ public class UserInfoController extends BaseController {
             UserInfoResponseDTO userInfoResponseDTO = userInfoService.queryUserInfo(userInfoRequestDTO);
             if (null == userInfoResponseDTO) {
                 // 用户名或密码错误
-                String key = StaticUtil.USER_ERROR_COUNT + username;
+                String key = StaticUtil.USER_ERROR_COUNT + sessionId;
                 String value = RedisUtil.get(key);
                 if (StringUtils.isNotEmpty(value)) {
                     int errorCount = Integer.parseInt(value);
@@ -117,13 +117,14 @@ public class UserInfoController extends BaseController {
     @ResponseBody
     @RequestMapping("checkSessionId")
     public ResponseResult<Boolean> checkSessionId(HttpServletRequest request, HttpServletResponse response) {
-        String sessionId = CookieUtil.getCookieValue(request, "JSESSIONID");
+        String sessionId = getSessiongId(request);
         if (null == sessionId) {
+            request.getSession(true);
             return null;
         }
-        String key = StaticUtil.USER_LOGIN_CHECK_CODE + sessionId;
+        String key = StaticUtil.USER_ERROR_COUNT + sessionId;
         String value = RedisUtil.get(key);
-        if (null == value) {
+        if (StringUtils.isEmpty(value)) {
             return ResponseUtil.success(false);
         }
         if (Integer.parseInt(value) >= 3) {

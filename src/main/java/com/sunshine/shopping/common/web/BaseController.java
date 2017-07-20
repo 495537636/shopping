@@ -59,9 +59,18 @@ public class BaseController {
     public String toHome(HttpServletRequest request, HttpServletResponse response) {
         // 开启session，会生成JSESSIONID并传到前台，同时放入Cookie中
         request.getSession(true);
-        String sessiongId = request.getSession().getId();
-        CookieUtil.setCookie(response, "QDL_SESSION", sessiongId, 30, "www.loving1314.com", null);
         return "index";
+    }
+
+    /**
+     * @Title: getSessiongId
+     * @Description: 获取sessionId
+     * @author LiMG
+     * @date 2017/7/20 10:43
+     * @see [类、类#方法、类#成员]
+     */
+    public String getSessiongId(HttpServletRequest request) {
+        return request.getSession().getId();
     }
 
 }

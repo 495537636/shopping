@@ -61,4 +61,26 @@ body {
     border: 1px solid #BDBDBD;
     padding: 10px 0 10px 40px;
     visibility: visible;
+    background:url(../../images/user/code_blue_24.png) no-repeat 0 center;
+    background-position-x: 10px;
+}
+
+#username {
+    background:url(../../images/user/user_blue_24.png) no-repeat 0 center;
+    background-position-x: 10px;
+}
+
+input[type=password]  {
+    background:url(../../images/user/lock_blue_24.png) no-repeat 0 center;
+    background-position-x: 10px;
+}
+
+#phone {
+    background:url(../../images/user/phone_blue_24.png) no-repeat 0 center;
+    background-position-x: 10px;
+}
+
+#phoneCode {
+    background:url(../../images/user/phoneCode_blue_24.png) no-repeat 0 center;
+    background-position-x: 10px;
 }

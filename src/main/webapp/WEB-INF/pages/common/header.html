@@ -43,13 +43,25 @@
 
     #alipay-img-logo strong {
         float: left;
-        padding: 13px 0 0 10px;
+        padding: 7px 0 0 10px;
         font-size: 24px;
         color: gray;
         height: 24px;
         line-height: 24px;
         font-weight: 100;
         font-family: Microsoft YaHei,Hiragino Sans GB,\5b8b\4f53;
+    }
+
+    .have_account {
+        font-size: 16px;
+        float: right;
+        padding: 25px 0 0 0;
+        color: #999;
+        display: none;
+    }
+
+    .have_account a {
+        color: #333;
     }
 </style>
 <div id="header">
@@ -61,6 +73,10 @@
                 </a>
                 <strong id="title"></strong>
             </figure>
+            <div class="have_account">
+                已有帐号？
+                <a href="login.html">请登录</a>
+            </div>
         </div>
     </header>
 </div>

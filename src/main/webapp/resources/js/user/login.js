@@ -26,21 +26,21 @@ $(function () {
 
     // 用户名失去焦点事件
     $("#username").blur(function () {
-        var value = $.trim($(this).val());
-        $.ajax({
-            url : "userInfo/checkUsername",
-            data : {
-                "username" : value
-            },
-            success: function (data) {
-                var result = data.data;
-                if (result) {
-                    showCheckCode();
-                } else {
-                    hideCheckCode();
+        var showFlag = $("#checkCodeDiv").css("display");
+        if (showFlag == 'none') {
+            var value = $.trim($(this).val());
+            $.ajax({
+                url : "userInfo/checkSessionId",
+                success: function (data) {
+                    var result = data.data;
+                    if (result) {
+                        showCheckCode();
+                    } else {
+                        hideCheckCode();
+                    }
                 }
-            }
-        });
+            });
+        }
     });
 
     // 绑定登录按钮事件
