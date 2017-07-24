@@ -15,7 +15,8 @@
             <div class="main">
                 <div class="formDir">
                     <div>
-                        <input type="text" id="username" name="username" placeholder="请输入用户名" class="form-control registerText" />
+                        <input type="text" id="username" name="username" maxlength="20" minlength="6" placeholder="请输入用户名"
+                               class="form-control registerText" />
                         <div class="msgDiv">
                             <span id="usernameRole">
                                 支持中文、字母、英文的组合，4-20个字符
@@ -23,7 +24,7 @@
                         </div>
                     </div>
                     <div>
-                        <input type="password" id="password" name="password" placeholder="请输入密码" class="form-control registerText" />
+                        <input type="password" id="password" name="password" maxlength="20" minlength="6" placeholder="请输入密码" class="form-control registerText" />
                         <div class="msgDiv">
                             <span id="passwordRole">
                                 建议使用字母、数字和符号两种及以上的组合，6-20个字符
@@ -31,7 +32,7 @@
                         </div>
                     </div>
                     <div>
-                        <input type="password" id="repassword" name="repassword" placeholder="请输入确认密码" class="form-control registerText" />
+                        <input type="password" id="repassword" name="repassword" maxlength="20" minlength="6" placeholder="请输入确认密码" class="form-control registerText" />
                         <div class="msgDiv">
                             <span id="repasswordRole">
                                 请再次输入密码
@@ -39,7 +40,7 @@
                         </div>
                     </div>
                     <div>
-                        <input type="text" id="phone" name="phone" placeholder="请输入手机号" class="form-control registerText" />
+                        <input type="text" id="phone" name="phone" maxlength="11" placeholder="请输入手机号" class="form-control registerText" />
                         <div class="msgDiv">
                             <span id="phoneRole">
                                 完成验证后,你可以用该手机登录和找回密码
@@ -48,7 +49,7 @@
                     </div>
                     <div>
                         <div class="input-group">
-                            <input type="text" id="checkCode" name="checkCode" class="form-control codeText" placeholder="请输入验证码" />
+                            <input type="text" id="checkCode" name="checkCode" maxlength="4" class="form-control codeText" placeholder="请输入验证码" />
                             <div class="input-group-addon" style="padding: 0 0 0 0;">
                                 <a href="javascript:;" id="changeCode">
                                     <img src="" title="看不清，换一张" />
@@ -62,7 +63,12 @@
                         </div>
                     </div>
                     <div>
-                        <input type="text" id="phoneCode" name="phoneCode" placeholder="请输入手机验证码" class="form-control registerText" />
+                        <div class="input-group">
+                            <input type="text" id="phoneCode" name="phoneCode" maxlength="6" placeholder="请输入手机验证码" class="form-control registerText" />
+                            <div class="input-group-addon" style="padding: 0 0 0 0;">
+                                <input type="button" class="reg_button" id="getPhoneCode" value="获取验证码" />
+                            </div>
+                        </div>
                         <div class="msgDiv">
                             <span id="phoneCodeRole">
                                 完成验证后,你可以用该手机登录和找回密码

@@ -21,7 +21,7 @@ $(function () {
 
     // 刷新验证码
     $("#changeCode").click(function () {
-        $(this).find("img").attr("src", "userInfo/getCaptchaImage?random="+Math.random());
+        $(this).find("img").attr("src", "userInfo/getCaptchaImage?type=1&random="+Math.random());
     });
 
     // 用户名失去焦点事件
@@ -167,7 +167,7 @@ function showMessage(flag) {
 
 // 显示验证码
 function showCheckCode() {
-    $("#changeCode").find("img").attr("src", "userInfo/getCaptchaImage?random="+Math.random());
+    $("#changeCode").find("img").attr("src", "userInfo/getCaptchaImage?type=1&random="+Math.random());
     $("#checkCodeDiv").show();
 }
 

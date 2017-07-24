@@ -28,7 +28,19 @@ public class StaticUtil {
     // 用户登录状态标识
     public static final String USER_LOGIN_FLAG = "USER_LOGIN_FLAG_";
 
-    // sessionId标识
+    // 登录验证码标识
     public static final String USER_LOGIN_CHECK_CODE = "USER_LOGIN_CHECK_CODE_";
+
+    // 用户注册验证码标识
+    public static final String USER_REGISTER_CHECK_CODE = "USER_REGISTER_CHECK_CODE_";
+
+    // 用户密码找回验证码标识
+    public static final String USER_FORGET_CHECK_CODE = "USER_FORGET_CHECK_CODE_";
+
+    // 用户注册手机验证码标识
+    public static final String USER_REGISTER_PHONE_CODE = "USER_REGISTER_PHONE_CODE_";
+
+    // 用户密码找回手机验证码标识
+    public static final String USER_FORGET_PHONE_CODE = "USER_FORGET_PHONE_CODE_";
 
 }

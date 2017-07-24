@@ -12,16 +12,15 @@
 
 package com.sunshine.shopping.service.impl;
 
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.sunshine.shopping.common.util.ValidateUtil;
 import com.sunshine.shopping.mapper.UserInfoMapper;
 import com.sunshine.shopping.model.dto.UserInfoRequestDTO;
 import com.sunshine.shopping.model.dto.UserInfoResponseDTO;
 import com.sunshine.shopping.model.entity.UserInfoEntity;
 import com.sunshine.shopping.service.UserInfoService;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @Title: UserInfoServiceImpl
@@ -73,6 +72,28 @@ public class UserInfoServiceImpl implements UserInfoService {
         ValidateUtil.paramRequired(username, "用户名不能为空");
         UserInfoEntity queryEntity = new UserInfoEntity();
         queryEntity.setUsername(username);
+        UserInfoEntity userInfo = userInfoMapper.query(queryEntity);
+        UserInfoResponseDTO userInfoResponseDTO = new UserInfoResponseDTO();
+        if (null != userInfo) {
+            BeanUtils.copyProperties(userInfo, userInfoResponseDTO);
+            return userInfoResponseDTO;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @Title: queryUserInfoByPhone
+     * @Description: 根据手机号查询用户
+     * @author LiMG
+     * @date 2017/7/21 16:37
+     * @see [类、类#方法、类#成员]
+     */
+    @Override
+    public UserInfoResponseDTO queryUserInfoByPhone(String phone) throws Exception {
+        ValidateUtil.paramRequired(phone, "手机号不能为空");
+        UserInfoEntity queryEntity = new UserInfoEntity();
+        queryEntity.setUserPhone(phone);
         UserInfoEntity userInfo = userInfoMapper.query(queryEntity);
         UserInfoResponseDTO userInfoResponseDTO = new UserInfoResponseDTO();
         if (null != userInfo) {

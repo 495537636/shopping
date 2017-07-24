@@ -4,13 +4,14 @@
     <resultMap id="BaseResultMap" type="com.sunshine.shopping.model.entity.UserInfoEntity">
         <id column="user_id" property="userId" jdbcType="VARCHAR"/>
         <result column="user_name" property="username" jdbcType="VARCHAR"/>
+        <result column="user_phone" property="userPhone" jdbcType="VARCHAR"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
         <result column="user_type" property="userType" jdbcType="INTEGER"/>
         <result column="user_flag" property="userFlag" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-        user_id, user_name, password, user_type, user_flag, create_time
+        user_id, user_name, user_phone, password, user_type, user_flag, create_time
     </sql>
 
     <!-- 查询用户信息 -->
@@ -20,6 +21,9 @@
         from userinfo where user_flag = 0
         <if test="username != null">
             and user_name = #{username, jdbcType=VARCHAR}
+        </if>
+        <if test="userPhone != null">
+            and user_phone = #{userPhone, jdbcType=VARCHAR}
         </if>
         <if test="password != null">
             and password = #{password, jdbcType=VARCHAR}

@@ -16,11 +16,20 @@ public interface UserInfoService {
     
     /** 
      * @Title: 根据用户名获取用户信息详情
-     * @Description: <功能详细描述>
+     * @Description: 根据用户名查询用户
      * @author LiMG
      * @date 2017/7/12 16:19 
      * @see [类、类#方法、类#成员]
      */
     UserInfoResponseDTO queryUserInfoByUsername(String username) throws Exception;
+
+    /**
+     * @Title: queryUserInfoByPhone
+     * @Description: 根据手机号查询用户
+     * @author LiMG
+     * @date 2017/7/21 16:31
+     * @see [类、类#方法、类#成员]
+     */
+    UserInfoResponseDTO queryUserInfoByPhone(String phone) throws Exception;
 
 }

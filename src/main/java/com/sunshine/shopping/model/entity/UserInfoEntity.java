@@ -53,6 +53,11 @@ public class UserInfoEntity implements Serializable {
     private Integer userFlag;
 
     /**
+     * 手机号
+     */
+    private String userPhone;
+
+    /**
      * 创建时间
      */
     private Date createTime;
@@ -95,6 +100,14 @@ public class UserInfoEntity implements Serializable {
 
     public void setUserFlag(Integer userFlag) {
         this.userFlag = userFlag;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
     }
 
     public Date getCreateTime() {

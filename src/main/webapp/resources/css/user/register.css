@@ -32,16 +32,16 @@ body {
 .msgDiv {
     min-height: 29px;
     width: 400px;
-    visibility: hidden;
+    /*visibility: hidden;*/
 }
 
 .msgDiv span {
     margin: 0;
-    background: url("../../images/user/warning_16-2.png") no-repeat 0 center;
+    background: url("../../images/user/warning_16-2.png") no-repeat;
     background-position-x: 0px;
     vertical-align: middle;
     font-size: 12px;
-    padding: 10px 0 10px 20px;
+    padding: 1px 0 10px 20px;
     text-align: left;
     color: #757575;
 }
@@ -83,4 +83,16 @@ input[type=password]  {
 #phoneCode {
     background:url(../../images/user/phoneCode_blue_24.png) no-repeat 0 center;
     background-position-x: 10px;
+}
+
+.redBorder {
+    border: 1px solid red !important;
+}
+
+.reg_button {
+    width: 130px;
+    height: 48px;
+    background: #f2f2f2;
+    border: none;
+    color: #333;
 }
