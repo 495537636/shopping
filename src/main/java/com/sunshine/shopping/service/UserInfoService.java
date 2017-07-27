@@ -32,4 +32,13 @@ public interface UserInfoService {
      */
     UserInfoResponseDTO queryUserInfoByPhone(String phone) throws Exception;
 
+    /**
+     * @Title: saveUserInfo
+     * @Description: 保存用户信息
+     * @author LiMG
+     * @date 2017/7/25 18:30
+     * @see [类、类#方法、类#成员]
+     */
+    Boolean saveUserInfo(UserInfoRequestDTO userInfoRequestDTO) throws Exception;
+
 }

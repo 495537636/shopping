@@ -36,6 +36,11 @@ public class UserInfoRequestDTO implements Serializable {
      */
     private String password;
 
+    /**
+     * 手机号
+     */
+    private String userPhone;
+
     public String getUsername() {
         return username;
     }
@@ -50,5 +55,13 @@ public class UserInfoRequestDTO implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
     }
 }

@@ -25,7 +25,7 @@ $(function () {
     });
 
     // 用户名失去焦点事件
-    $("#username").blur(function () {
+    $("#loginName").blur(function () {
         var showFlag = $("#checkCodeDiv").css("display");
         if (showFlag == 'none') {
             var value = $.trim($(this).val());
@@ -49,13 +49,13 @@ $(function () {
         var checkFlag = checkForm();
         if (checkFlag) {
             $("#login").text("正在登录...");
-            var username = $.trim($("#username").val());
+            var loginName = $.trim($("#loginName").val());
             var password = $.trim($("#password").val());
             var checkCode = $.trim($("#checkCode").val());
             $.ajax({
                 url: "userInfo/login",
                 data: {
-                    "username": username,
+                    "loginName": loginName,
                     "password": password,
                     "checkCode" : checkCode
                 },
@@ -107,18 +107,18 @@ var app = new Vue({
 });
 
 function checkForm() {
-    var username = $.trim($("#username").val());
+    var loginName = $.trim($("#loginName").val());
     var password = $.trim($("#password").val());
     var checkCode = $.trim($("#checkCode").val());
     var showFlag = $("#checkCodeDiv").css("display");
-    if (username.length == 0 && password.length == 0) {
-        shakeText($("#username"));
+    if (loginName.length == 0 && password.length == 0) {
+        shakeText($("#loginName"));
         shakeText($("#password"));
         showMessage(3);
         return false;
     }
-    if (username.length == 0) {
-        shakeText($("#username"));
+    if (loginName.length == 0) {
+        shakeText($("#loginName"));
         showMessage(1);
         return false;
     }

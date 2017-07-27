@@ -22,8 +22,17 @@ package com.sunshine.shopping.util;
  */
 public class StaticUtil {
 
+    // 用户注册手机号获取验证码次数
+    public static final int USER_REGISTER_COUNT = 5;
+
+    // 获取手机验证码时间间隔
+    public static final int USER_PHONE_CODE_TIME = 120;
+
     // 用户登录错误次数前缀
     public static final String USER_ERROR_COUNT =  "USER_ERROR_COUNT_";
+
+    // 用户注册获取验证码次数
+    public static final String USER_REGISTER_PHONE_CODE_COUNT = "USER_REGISTER_PHONE_CODE_COUNT_";
 
     // 用户登录状态标识
     public static final String USER_LOGIN_FLAG = "USER_LOGIN_FLAG_";
@@ -42,5 +51,8 @@ public class StaticUtil {
 
     // 用户密码找回手机验证码标识
     public static final String USER_FORGET_PHONE_CODE = "USER_FORGET_PHONE_CODE_";
+
+    // 用户获取验证码超时时间
+    public static final String USER_REGISTER_PHONE_CODE_TIME_OUT = "USER_REGISTER_PHONE_CODE_TIME_OUT_";
 
 }

@@ -56,7 +56,7 @@ public class ShoppingConfig implements ApplicationContextAware {
     public DruidDataSource getDataSource() {
         try {
             DruidDataSource dataSource = new DruidDataSource();
-            dataSource.setUrl("jdbc:mysql://localhost:3306/shopping?useSSL=true");
+            dataSource.setUrl("jdbc:mysql://localhost:3306/shopping?useSSL=true&useUnicode=true&characterEncoding=UTF-8");
             dataSource.setUsername("root");
             dataSource.setPassword("root");
             return dataSource;

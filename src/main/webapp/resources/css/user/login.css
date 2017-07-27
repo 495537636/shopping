@@ -87,7 +87,7 @@ body {
     padding: 10px 0 10px 40px;
 }
 
-#username {
+#loginName {
     background:url(../../images/user/user_blue_24.png) no-repeat 0 center;
     background-position-x: 10px;
 }

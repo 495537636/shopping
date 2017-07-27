@@ -19,11 +19,9 @@ import com.sunshine.shopping.model.dto.UserInfoResponseDTO;
 import com.sunshine.shopping.response.ResponseResult;
 import com.sunshine.shopping.response.ResponseUtil;
 import com.sunshine.shopping.service.UserInfoService;
-import com.sunshine.shopping.util.CaptchaUtil;
-import com.sunshine.shopping.util.MessageUtil;
-import com.sunshine.shopping.util.RedisUtil;
-import com.sunshine.shopping.util.StaticUtil;
+import com.sunshine.shopping.util.*;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +29,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.util.Map;
 
 import static com.sunshine.shopping.response.ResponseCode.UserCode.*;
 
@@ -59,12 +59,20 @@ public class UserInfoController extends BaseController {
     @ResponseBody
     @RequestMapping("login")
     public ResponseResult<UserInfoResponseDTO> login(HttpServletRequest request, HttpServletResponse response) {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        UserInfoRequestDTO userInfoRequestDTO = new UserInfoRequestDTO();
-        userInfoRequestDTO.setUsername(username);
-        userInfoRequestDTO.setPassword(password);
         try {
+            String loginName = request.getParameter("loginName");
+            String password = request.getParameter("password");
+            ValidateUtil.paramRequired(loginName, "登录名不能为空");
+            ValidateUtil.paramRequired(password, "密码不能为空");
+            UserInfoRequestDTO userInfoRequestDTO = new UserInfoRequestDTO();
+            String regex = "^1[3,5,4,8,7,9]\\d{9}$";
+            if (loginName.matches(regex)) {
+                userInfoRequestDTO.setUserPhone(loginName);
+            } else {
+                userInfoRequestDTO.setUsername(loginName);
+            }
+            // 将密码进行MD5加密
+            userInfoRequestDTO.setPassword(MD5Util.md5(password));
             String sessionId = getSessiongId(request);
             String redisCheckCode = RedisUtil.get(StaticUtil.USER_LOGIN_CHECK_CODE + sessionId);
             if (StringUtils.isNotEmpty(redisCheckCode)) {
@@ -265,10 +273,70 @@ public class UserInfoController extends BaseController {
             ValidateUtil.paramRequired(phone, "手机号不能为空");
             String type = request.getParameter("sendType");
             ValidateUtil.paramRequired(phone, "发送类型不能为空");
-            boolean result = MessageUtil.sendPhoneCode(phone, Integer.parseInt(type));
-            return ResponseUtil.success(result);
+            Map<String, Object> map = MessageUtil.sendPhoneCode(phone, Integer.parseInt(type));
+            Boolean flag = (Boolean) map.get("flag");
+            if (flag.booleanValue()) {
+                // 移除图片验证码
+                String sessionId = getSessiongId(request);
+                String checkCodeKey = StaticUtil.USER_REGISTER_CHECK_CODE + sessionId;
+                RedisUtil.del(checkCodeKey);
+                return ResponseUtil.success(true);
+            } else {
+                String message = String.valueOf(map.get("message"));
+                return ResponseUtil.error("0001", message);
+            }
         } catch (Exception e) {
             LOGGER.error("手机验证码发送异常,异常信息:{}", e.getMessage(), e);
+            return ResponseUtil.error("0001", "系统异常，请稍后重试");
+        }
+    }
+
+    /**
+     * @Title: checkPhoneCode
+     * @Description: 校验手机验证码
+     * @author LiMG
+     * @date 2017/7/25 11:34
+     * @see [类、类#方法、类#成员]
+     */
+    @ResponseBody
+    @RequestMapping("checkPhoneCode")
+    public ResponseResult<Boolean> checkPhoneCode(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            String phoneCode = request.getParameter("phoneCode");
+            String phoneNum = request.getParameter("phoneNum");
+            String type = request.getParameter("checkType");
+            ValidateUtil.paramRequired(phoneNum, "手机号不能为空");
+            ValidateUtil.paramRequired(phoneCode, "验证码不能为空");
+            ValidateUtil.paramRequired(type, "验证类型不能为空");
+            Map<String, Object> map = MessageUtil.checkPhoneCode(phoneNum, phoneCode, Integer.parseInt(type));
+            Boolean flag = (Boolean) map.get("flag");
+            if (flag.booleanValue()) {
+                return ResponseUtil.success(true);
+            } else {
+                String message = String.valueOf(map.get("message"));
+                return ResponseUtil.error("0001", message);
+            }
+        } catch (Exception e) {
+            LOGGER.error("校验手机验证码异常,异常信息:{}", e.getMessage(), e);
+            return ResponseUtil.error("0001", "系统异常，请稍后重试");
+        }
+    }
+
+    /**
+     * @Title: saveUserInfo
+     * @Description: 保存用户信息
+     * @author LiMG
+     * @date 2017/7/25 18:16
+     * @see [类、类#方法、类#成员]
+     */
+    @ResponseBody
+    @RequestMapping("saveUserInfo")
+    public ResponseResult<Boolean> saveUserInfo(HttpServletRequest request, UserInfoRequestDTO userInfoRequestDTO) {
+        try {
+            Boolean result = userInfoService.saveUserInfo(userInfoRequestDTO);
+            return ResponseUtil.success(result);
+        } catch (Exception e) {
+            LOGGER.error("保存用户信息异常,异常信息:{}", e.getMessage(), e);
             return ResponseUtil.error("0001", "系统异常，请稍后重试");
         }
     }
