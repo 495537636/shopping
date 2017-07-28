@@ -11,9 +11,4 @@ public class GenerateIDUtil {
         return uuid;
     }
 	
-	public static void main(String[] args) {
-		GenerateIDUtil generateIDUtil = new GenerateIDUtil();
-		System.out.println(generateIDUtil.generateID());
-	}
-
 }
