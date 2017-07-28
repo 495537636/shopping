@@ -21,7 +21,6 @@ import com.sunshine.shopping.response.ResponseUtil;
 import com.sunshine.shopping.service.UserInfoService;
 import com.sunshine.shopping.util.*;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +28,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.util.Map;
 
 import static com.sunshine.shopping.response.ResponseCode.UserCode.*;
@@ -45,6 +43,8 @@ import static com.sunshine.shopping.response.ResponseCode.UserCode.*;
 @Controller
 @RequestMapping("userInfo/")
 public class UserInfoController extends BaseController {
+
+    private static String REGEX = "^1[3,5,4,8,7,9]\\d{9}$";
 
     @Autowired
     private UserInfoService userInfoService;
@@ -65,8 +65,7 @@ public class UserInfoController extends BaseController {
             ValidateUtil.paramRequired(loginName, "登录名不能为空");
             ValidateUtil.paramRequired(password, "密码不能为空");
             UserInfoRequestDTO userInfoRequestDTO = new UserInfoRequestDTO();
-            String regex = "^1[3,5,4,8,7,9]\\d{9}$";
-            if (loginName.matches(regex)) {
+            if (loginName.matches(REGEX)) {
                 userInfoRequestDTO.setUserPhone(loginName);
             } else {
                 userInfoRequestDTO.setUsername(loginName);
@@ -192,6 +191,33 @@ public class UserInfoController extends BaseController {
             }
         } catch (Exception e) {
             LOGGER.error("校验用户名异常,异常信息:{}", e.getMessage(), e);
+            return ResponseUtil.error("0001", "系统异常，请稍后重试");
+        }
+    }
+
+    /**
+     * @Title: checkLoginNameExists
+     * @Description: 校验登录名是否存在
+     * @author LiMG
+     * @date 2017/7/28 17:26
+     * @see [类、类#方法、类#成员]
+     */
+    @ResponseBody
+    @RequestMapping("checkLoginNameExists")
+    public ResponseResult<UserInfoResponseDTO> checkLoginNameExists(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            String loginName = request.getParameter("loginName");
+            ValidateUtil.paramRequired(loginName, "登录名不能为空");
+            UserInfoRequestDTO userInfoRequestDTO = new UserInfoRequestDTO();
+            userInfoRequestDTO.setLoginName(loginName);
+            UserInfoResponseDTO userInfo = userInfoService.queryUserInfo(userInfoRequestDTO);
+            if (null != userInfo) {
+                return ResponseUtil.success(userInfo);
+            } else {
+                return ResponseUtil.success(null);
+            }
+        } catch (Exception e) {
+            LOGGER.error("校验登录名是否存在异常,异常信息:{}", e.getMessage(), e);
             return ResponseUtil.error("0001", "系统异常，请稍后重试");
         }
     }

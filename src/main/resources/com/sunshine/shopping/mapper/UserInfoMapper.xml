@@ -28,6 +28,10 @@
         <if test="password != null">
             and password = #{password, jdbcType=VARCHAR}
         </if>
+        <if test="loginName != null">
+            and (user_name = #{loginName, jdbcType=VARCHAR}
+            or user_phone = #{loginName, jdbcType=VARCHAR})
+        </if>
     </select>
 
     <!-- 保存用户信息 -->

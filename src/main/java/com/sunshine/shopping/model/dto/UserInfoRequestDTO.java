@@ -41,6 +41,11 @@ public class UserInfoRequestDTO implements Serializable {
      */
     private String userPhone;
 
+    /**
+     * 登录名
+     */
+    private String loginName;
+
     public String getUsername() {
         return username;
     }
@@ -63,5 +68,13 @@ public class UserInfoRequestDTO implements Serializable {
 
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;
+    }
+
+    public String getLoginName() {
+        return loginName;
+    }
+
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
     }
 }
