@@ -12,25 +12,22 @@
 
 package com.sunshine.shopping.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
+import java.io.IOException;
+
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import java.io.IOException;
+import com.alibaba.druid.pool.DruidDataSource;
 
 /**
  * @Title: config
@@ -45,8 +42,8 @@ import java.io.IOException;
 @ComponentScan("com.sunshine.shopping")
 public class ShoppingConfig implements ApplicationContextAware {
 
-    @Autowired
-    private ApplicationContext applicationContext;
+//    @Autowired
+//    private ApplicationContext applicationContext;
 
     /**
      * 配置数据源
@@ -106,6 +103,6 @@ public class ShoppingConfig implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
+//        this.applicationContext = applicationContext;
     }
 }

@@ -34,7 +34,7 @@ public class RedisConfig {
     @Bean
     public RedisUtil setRedis() {
         RedisUtil redisUtil = new RedisUtil();
-        redisUtil.setRedisTemplate(getRedisTemplate());
+        RedisUtil.setRedisTemplate(getRedisTemplate());
         return redisUtil;
     }
 
@@ -57,8 +57,8 @@ public class RedisConfig {
     }
 
     @Bean(name = "redisTemplate")
-    public RedisTemplate getRedisTemplate() {
-        RedisTemplate template = new RedisTemplate<>();
+    public RedisTemplate<String, String> getRedisTemplate() {
+        RedisTemplate<String, String> template = new RedisTemplate<>();
         template.setConnectionFactory(getJedisConnectionFactory());
         // 将key、value、hashKey、hashValue序列化，解决key和value前面出现类似转义字符内容的问题
         // 这种问题：\xAC\xED\x00\x05t\x00\x09checkCode

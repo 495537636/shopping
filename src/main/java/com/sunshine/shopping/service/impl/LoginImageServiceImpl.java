@@ -12,18 +12,18 @@
 
 package com.sunshine.shopping.service.impl;
 
-import com.sunshine.shopping.common.util.ValidateUtil;
+import java.util.List;
+
+import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.sunshine.shopping.mapper.LoginImageMapper;
 import com.sunshine.shopping.model.dto.LoginImageRequestDTO;
 import com.sunshine.shopping.model.dto.LoginImageResponseDTO;
 import com.sunshine.shopping.model.entity.LoginImageEntity;
 import com.sunshine.shopping.service.LoginImageService;
 import com.sunshine.shopping.util.CopyUtil;
-import org.apache.commons.beanutils.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @Title: LoginImageServiceImpl
