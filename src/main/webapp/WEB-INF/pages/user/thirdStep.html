@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<!-- 引入公共头部文件 -->
+<head>
+    <title>找回密码</title>
+    <!-- 引入公共CSS文件 -->
+    <baseCss th:include="common/baseCss"></baseCss>
+    <link href="http://localhost:8899/shopping/resources/css/user/forgotPassword.css" rel="stylesheet" />
+</head>
+<body>
+<!-- 引入头部内容 -->
+<div th:include="common/header"></div>
+<div class="section section-subnav">
+    <div class="section_subnav">
+        <ul class="subnav_process">
+            <li class="active">
+                <div>
+                    <i>1</i>
+                    <p>填写帐号</p>
+                </div>
+                <i></i>
+            </li>
+            <li class="active">
+                <div>
+                    <i>2</i>
+                    <p>身份验证</p>
+                </div>
+                <i></i>
+            </li>
+            <li class="active">
+                <div>
+                    <i>3</i>
+                    <p>设置新密码</p>
+                </div>
+                <i></i>
+            </li>
+            <li class="last">
+                <div>
+                    <i>4</i>
+                    <p>完成</p>
+                </div>
+                <i></i>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container" id="app">
+    <div class="main">
+        <form name="fm">
+            <input type="hidden" name="userPhone" id="userPhone" th:value="${ userPhone }" />
+            <input type="hidden" name="loginName" id="loginName" th:value="${ loginName }" />
+            <div class="msgDiv">
+                <span id="errorMsg"></span>
+            </div>
+            <div class="inputFiled">
+                <label>新登录密码：</label>
+                <input type="password" id="password" name="password" v-model="user.loginName"
+                       placeholder="新登录密码" class="form-control" />
+            </div>
+            <div class="inputFiled">
+                <label>确认新密码:</label>
+                <input type="password" id="repassword" name="repassword" v-model="user.loginName"
+                       placeholder="确认新密码" class="form-control" />
+            </div>
+            <input type="button" class="btn btn-primary" value="下一步" id="nextStep" />
+        </form>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">提示信息</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">好的</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 引入底部内容 -->
+<footer th:include="common/footer"></footer>
+<!-- 引入公共JS文件 -->
+<baseJs th:include="common/baseJs"></baseJs>
+<script type="text/javascript" src="http://localhost:8899/shopping/resources/js/user/thirdStep.js"></script>
+</body>
+</html>

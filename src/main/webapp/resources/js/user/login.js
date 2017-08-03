@@ -57,7 +57,8 @@ $(function () {
                 data: {
                     "loginName": loginName,
                     "password": password,
-                    "checkCode" : checkCode
+                    "checkCode" : checkCode,
+                    "type" : 1
                 },
                 type: "post",
                 success: function (response) {

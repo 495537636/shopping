@@ -55,4 +55,10 @@ public class StaticUtil {
     // 用户获取验证码超时时间
     public static final String USER_REGISTER_PHONE_CODE_TIME_OUT = "USER_REGISTER_PHONE_CODE_TIME_OUT_";
 
+    // 用户找回密码MD5加密数据
+    public static final String USER_FIND_PASSWORD_MD5 = "USER_FIND_PASSWORD_MD5_";
+
+    // MD5加密的key
+    public static final String MD5_KEY = "上山打老虎";
+
 }

@@ -69,7 +69,7 @@ public class DispatcherConfig extends WebMvcConfigurerAdapter {
 		// 跳转到注册页
 		registry.addViewController("/register.html").setViewName("user/register");
 		// 跳转到找回密码页面
-		registry.addViewController("/forgotPassword.html").setViewName("user/forgotPassword");
+		registry.addViewController("/findPassword.html").setViewName("user/firstStep");
 	}
 
 	/**

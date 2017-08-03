@@ -23,12 +23,15 @@ import com.sunshine.shopping.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.sunshine.shopping.response.ResponseCode.UserCode.*;
 
@@ -156,8 +159,10 @@ public class UserInfoController extends BaseController {
             String key = null;
             if (type == 1) {
                 key = StaticUtil.USER_LOGIN_CHECK_CODE + sessionId;
-            } else {
+            } else if (type == 2) {
                 key = StaticUtil.USER_REGISTER_CHECK_CODE + sessionId;
+            } else if (type == 3) {
+                key = StaticUtil.USER_FORGET_CHECK_CODE + sessionId;
             }
             // 10分钟有效期缓存
             RedisUtil.set(key, code, 600);
@@ -209,7 +214,8 @@ public class UserInfoController extends BaseController {
             String loginName = request.getParameter("loginName");
             ValidateUtil.paramRequired(loginName, "登录名不能为空");
             UserInfoRequestDTO userInfoRequestDTO = new UserInfoRequestDTO();
-            userInfoRequestDTO.setLoginName(loginName);
+            userInfoRequestDTO.setUsername(loginName);
+            userInfoRequestDTO.setUserPhone(loginName);
             UserInfoResponseDTO userInfo = userInfoService.queryUserInfo(userInfoRequestDTO);
             if (null != userInfo) {
                 return ResponseUtil.success(userInfo);
@@ -263,8 +269,18 @@ public class UserInfoController extends BaseController {
         try {
             String sessionId = getSessiongId(request);
             String checkCode = request.getParameter("checkCode");
+            int type = null == request.getParameter("type") ? 1 : "".equals(request.getParameter("type")) ? 1 : Integer.parseInt(request.getParameter("type"));
             if (StringUtils.isNotEmpty(checkCode)) {
-                String key = StaticUtil.USER_REGISTER_CHECK_CODE + sessionId;
+                String key = null;
+                if (type == 1) {
+                    key = StaticUtil.USER_LOGIN_CHECK_CODE + sessionId;
+                } else if (type == 2) {
+                    key = StaticUtil.USER_REGISTER_CHECK_CODE + sessionId;
+                } else if (type == 3) {
+                    key = StaticUtil.USER_FORGET_CHECK_CODE + sessionId;
+                } else {
+                    return ResponseUtil.error("0001", "参数错误，请重试");
+                }
                 String value = RedisUtil.get(key);
                 if (StringUtils.isEmpty(value)) {
                     return ResponseUtil.error("0001", "验证码已失效，请刷新");
@@ -365,6 +381,88 @@ public class UserInfoController extends BaseController {
             LOGGER.error("保存用户信息异常,异常信息:{}", e.getMessage(), e);
             return ResponseUtil.error("0001", "系统异常，请稍后重试");
         }
+    }
+
+    /**
+     * @Title: secondStep
+     * @Description: 找回密码第二步
+     * @author LiMG
+     * @date 2017/8/1 13:09
+     * @see [类、类#方法、类#成员]
+     */
+    @RequestMapping("secondStep")
+    public String secondStep(HttpServletRequest request, Model model) {
+        try {
+            String loginName = request.getParameter("loginName");
+            if (StringUtils.isEmpty(loginName)) {
+                return "common/error";
+            }
+            UserInfoRequestDTO userInfoRequestDTO = new UserInfoRequestDTO();
+            userInfoRequestDTO.setUsername(loginName);
+            userInfoRequestDTO.setUserPhone(loginName);
+            UserInfoResponseDTO responseDTO = userInfoService.queryUserInfo(userInfoRequestDTO);
+            if (null == responseDTO) {
+                return "common/error";
+            }
+            String userPhone = responseDTO.getUserPhone();
+            String pat = "\\d+";
+            Pattern pattern = Pattern.compile(pat);
+            Matcher matcher = pattern.matcher(userPhone.substring(3, 8));
+            String newStr = "";
+            while (matcher.find()){
+                newStr += matcher.replaceAll("*****");
+            }
+            model.addAttribute("showUserPhone", userPhone.substring(0, 3) + newStr + userPhone.substring(8));
+            model.addAttribute("userPhone", responseDTO.getUserPhone());
+            String md5 = MD5Util.md5(responseDTO.getUserId() + StaticUtil.MD5_KEY + userPhone);
+            String key = StaticUtil.USER_FIND_PASSWORD_MD5 + getSessiongId(request);
+            RedisUtil.set(key, md5);
+            model.addAttribute("key", md5);
+            model.addAttribute("loginName", loginName);
+        } catch (Exception e) {
+            LOGGER.error("找回密码第二步异常,异常信息:{}", e.getMessage(), e);
+        }
+        return "user/secondStep";
+    }
+
+    /**
+     * @Title: thirdStep
+     * @Description: 找回密码第三步
+     * @author LiMG
+     * @date 2017/8/1 13:09
+     * @see [类、类#方法、类#成员]
+     */
+    @RequestMapping("thirdStep")
+    public String thirdStep(HttpServletRequest request, Model model) {
+        try {
+            String loginName = request.getParameter("loginName");
+            String userPhone = request.getParameter("userPhone");
+            String key = request.getParameter("key");
+            if (StringUtils.isEmpty(key)) {
+                return "common/error";
+            } else {
+                UserInfoRequestDTO userInfoRequestDTO = new UserInfoRequestDTO();
+                userInfoRequestDTO.setUsername(loginName);
+                userInfoRequestDTO.setUserPhone(loginName);
+                UserInfoResponseDTO responseDTO = userInfoService.queryUserInfo(userInfoRequestDTO);
+                if (null == responseDTO) {
+                    return "common/error";
+                }
+                String md5 = MD5Util.md5(responseDTO.getUserId() + StaticUtil.MD5_KEY + userPhone);
+                String redisKey = StaticUtil.USER_FIND_PASSWORD_MD5 + getSessiongId(request);
+                String redisMd5 = RedisUtil.get(redisKey);
+                if (!md5.equals(redisMd5)) {
+                    return "common/error";
+                }
+                // 校验完成，删除保存的MD5值
+                //RedisUtil.del(redisKey);
+            }
+            model.addAttribute("loginName", loginName);
+            model.addAttribute("userPhone", userPhone);
+        } catch (Exception e) {
+            LOGGER.error("找回密码第三步异常,异常信息:{}", e.getMessage(), e);
+        }
+        return "user/thirdStep";
     }
 
 }

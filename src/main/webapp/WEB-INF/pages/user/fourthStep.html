@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<!-- 引入公共头部文件 -->
+<head>
+    <title>找回密码</title>
+    <!-- 引入公共CSS文件 -->
+    <baseCss th:include="common/baseCss"></baseCss>
+    <link href="resources/css/user/forgotPassword.css" rel="stylesheet" />
+</head>
+<body>
+<!-- 引入头部内容 -->
+<div th:include="common/header"></div>
+<div class="section section-subnav">
+    <div class="section_subnav">
+        <ul class="subnav_process">
+            <li class="active">
+                <div>
+                    <i>1</i>
+                    <p>填写帐号</p>
+                </div>
+                <i></i>
+            </li>
+            <li class="active">
+                <div>
+                    <i>2</i>
+                    <p>身份验证</p>
+                </div>
+                <i></i>
+            </li>
+            <li class="active">
+                <div>
+                    <i>3</i>
+                    <p>设置新密码</p>
+                </div>
+                <i></i>
+            </li>
+            <li class="last active">
+                <div>
+                    <i>4</i>
+                    <p>完成</p>
+                </div>
+                <i></i>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container" id="app">
+    <div class="main">
+        <div class="msgDiv">
+            <span id="errorMsg"></span>
+        </div>
+        <div class="inputFiled">
+            <label>账户名：</label>
+            <input type="text" id="loginName" name="loginName" v-model="user.loginName"
+                   placeholder="用户名/手机号" class="form-control" />
+        </div>
+        <div class="inputFiled">
+            <label>验证码:</label>
+            <div class="input-group">
+                <input type="text" id="checkCode" name="checkCode" v-model="user.checkCode"
+                       placeholder="验证码" class="form-control codeText" />
+                <div class="input-group-addon" style="padding: 0 0 0 0;">
+                    <a href="javascript:;" id="changeCode">
+                        <img src="" title="看不清，换一张" />
+                    </a>
+                </div>
+            </div>
+        </div>
+        <input type="button" class="btn btn-primary" value="下一步" id="next" />
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">提示信息</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">好的</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 引入底部内容 -->
+<footer th:include="common/footer"></footer>
+<!-- 引入公共JS文件 -->
+<baseJs th:include="common/baseJs"></baseJs>
+<script type="text/javascript" src="resources/js/user/firstStep.js"></script>
+</body>
+</html>

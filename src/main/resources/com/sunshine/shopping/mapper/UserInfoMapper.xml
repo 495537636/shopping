@@ -19,18 +19,26 @@
         select
         <include refid="Base_Column_List"/>
         from userinfo where user_flag = 0
-        <if test="username != null">
-            and user_name = #{username, jdbcType=VARCHAR}
-        </if>
-        <if test="userPhone != null">
-            and user_phone = #{userPhone, jdbcType=VARCHAR}
-        </if>
+        <choose>
+            <when test="username != null and userPhone != null">
+                and (user_name = #{username, jdbcType=VARCHAR}
+                or user_phone = #{userPhone, jdbcType=VARCHAR})
+            </when>
+            <when test="username != null and userPhone == null">
+                and user_name = #{username, jdbcType=VARCHAR}
+            </when>
+            <when test="username == null and userPhone != null">
+                and user_phone = #{userPhone, jdbcType=VARCHAR}
+            </when>
+        </choose>
+        <!--<if test="username != null">-->
+            <!--and user_name = #{username, jdbcType=VARCHAR}-->
+        <!--</if>-->
+        <!--<if test="userPhone != null">-->
+            <!--and user_phone = #{userPhone, jdbcType=VARCHAR}-->
+        <!--</if>-->
         <if test="password != null">
             and password = #{password, jdbcType=VARCHAR}
-        </if>
-        <if test="loginName != null">
-            and (user_name = #{loginName, jdbcType=VARCHAR}
-            or user_phone = #{loginName, jdbcType=VARCHAR})
         </if>
     </select>
 

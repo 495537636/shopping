@@ -6,7 +6,7 @@
         <title>找回密码</title>
         <!-- 引入公共CSS文件 -->
         <baseCss th:include="common/baseCss"></baseCss>
-        <link href="resources/css/user/forgotPassword.css" rel="stylesheet" />
+        <link href="http://localhost:8899/shopping/resources/css/user/forgotPassword.css" rel="stylesheet" />
     </head>
     <body>
     <!-- 引入头部内容 -->
@@ -21,7 +21,7 @@
                     </div>
                     <i></i>
                 </li>
-                <li>
+                <li class="active">
                     <div>
                         <i>2</i>
                         <p>身份验证</p>
@@ -46,36 +46,44 @@
         </div>
     </div>
     <div class="container" id="app">
-        <div class="main">
-            <div class="msgDiv">
-                <span id="errorMsg"></span>
-            </div>
-            <div class="inputFiled">
-                <label>账户名：</label>
-                <input type="text" id="loginName" name="loginName" v-model="user.loginName"
-                       placeholder="用户名/手机号" class="form-control" />
-            </div>
-            <div class="inputFiled">
-                <label>验证码:</label>
-                <div class="input-group">
-                    <input type="text" id="checkCode" name="checkCode" v-model="user.checkCode"
-                           placeholder="验证码" class="form-control codeText" />
-                    <div class="input-group-addon" style="padding: 0 0 0 0;">
-                        <a href="javascript:;" id="changeCode">
-                            <img src="" title="看不清，换一张" />
-                        </a>
+        <div class="secondMain">
+            <form name="fm">
+                <input type="hidden" name="userPhone" id="userPhone" th:value="${ userPhone }" />
+                <input type="hidden" name="loginName" id="loginName" th:value="${ loginName }" />
+                <input type="hidden" name="key" id="key" th:value="${ key }" />
+                <div class="mobileDiv">
+                    <div class="item">
+                        <label>已验证手机：</label>
+                        <strong th:text="${ showUserPhone }"></strong>
+                    </div>
+                    <div class="item">
+                        <label>请填写手机校验码：</label>
+                        <div class="fl">
+                            <div class="input-group">
+                                <input type="text" id="phoneCode" name="phoneCode" maxlength="6" class="form-control" placeholder="请输入验证码" />
+                                <div class="input-group-addon" style="padding: 0 0 0 0;">
+                                    <input type="button" class="reg_button" id="getPhoneCode" value="获取手机校验码" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item pull_center">
+                        <span id="errorMsg" class="msg-text"></span>
+                    </div>
+                    <div class="item pull_center">
+                        <input type="button" class="btn btn-primary" value="下一步" id="nextStep" />
                     </div>
                 </div>
-            </div>
-            <input type="button" class="btn btn-primary" value="下一步" id="next" />
+            </form>
         </div>
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                         <h4 class="modal-title" id="myModalLabel">提示信息</h4>
                     </div>
                     <div class="modal-body">
@@ -92,6 +100,6 @@
     <footer th:include="common/footer"></footer>
     <!-- 引入公共JS文件 -->
     <baseJs th:include="common/baseJs"></baseJs>
-    <script type="text/javascript" src="resources/js/user/forgotPassword.js"></script>
+    <script type="text/javascript" src="http://localhost:8899/shopping/resources/js/user/secondStep.js"></script>
     </body>
 </html>
