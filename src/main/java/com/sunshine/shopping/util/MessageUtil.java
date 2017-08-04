@@ -38,8 +38,11 @@ public class MessageUtil {
      */
     public static Map<String, Object> sendPhoneCode(String phone, int sendType) {
         String num = RandomUtil.generateSixLengthNum();
-        String timeOutKey = StaticUtil.USER_REGISTER_PHONE_CODE_TIME_OUT + phone;
+        String timeOutKey = StaticUtil.USER_PHONE_CODE_TIME_OUT + phone;
         String countKey = StaticUtil.USER_REGISTER_PHONE_CODE_COUNT + phone;
+        if (sendType == 2) {
+            countKey = StaticUtil.USER_FIND_PASSWORD_PHONE_CODE_COUNT + phone;
+        }
         String timeOut = RedisUtil.get(timeOutKey);
         Map<String, Object> map = new HashMap<>();
         if (StringUtils.isNotEmpty(timeOut)) {
@@ -50,7 +53,7 @@ public class MessageUtil {
         String count = RedisUtil.get(countKey);
         if (StringUtils.isNotEmpty(count) && Integer.parseInt(count) >= 5) {
             map.put("flag", false);
-            map.put("message", "认证次数超过限制");
+            map.put("message", "今日认证次数超过限制");
             return map;
         }
         String redisKey = null;
@@ -71,7 +74,7 @@ public class MessageUtil {
         } else {
             sendCount = 1;
         }
-        RedisUtil.set(countKey, String.valueOf(sendCount));
+        RedisUtil.set(countKey, String.valueOf(sendCount), 3600);
         // 10分钟有效期
         RedisUtil.set(redisKey, num, 600);
         map.put("flag", true);

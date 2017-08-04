@@ -6,7 +6,7 @@
     <title>找回密码</title>
     <!-- 引入公共CSS文件 -->
     <baseCss th:include="common/baseCss"></baseCss>
-    <link href="resources/css/user/forgotPassword.css" rel="stylesheet" />
+    <link href="http://localhost:8899/shopping/resources/css/user/forgotPassword.css" rel="stylesheet" />
 </head>
 <body>
 <!-- 引入头部内容 -->
@@ -46,45 +46,13 @@
     </div>
 </div>
 <div class="container" id="app">
-    <div class="main">
-        <div class="msgDiv">
-            <span id="errorMsg"></span>
-        </div>
-        <div class="inputFiled">
-            <label>账户名：</label>
-            <input type="text" id="loginName" name="loginName" v-model="user.loginName"
-                   placeholder="用户名/手机号" class="form-control" />
-        </div>
-        <div class="inputFiled">
-            <label>验证码:</label>
-            <div class="input-group">
-                <input type="text" id="checkCode" name="checkCode" v-model="user.checkCode"
-                       placeholder="验证码" class="form-control codeText" />
-                <div class="input-group-addon" style="padding: 0 0 0 0;">
-                    <a href="javascript:;" id="changeCode">
-                        <img src="" title="看不清，换一张" />
-                    </a>
-                </div>
-            </div>
-        </div>
-        <input type="button" class="btn btn-primary" value="下一步" id="next" />
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">提示信息</h4>
-                </div>
-                <div class="modal-body">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">好的</button>
-                </div>
-            </div>
+    <div class="success">
+        <div class="correct_img"></div>
+        <div class="correct_msg">
+            <p class="bold">新密码设置成功！</p>
+            <p class="small">请牢记您设置的密码。您现在可以<a href="index.html">继续购物</a></p>
+            <p class="small"><span>3</span>秒后为您自动跳转</p>
+            <p class="small">温馨提醒：为了确保账户安全，请定期修改安全性高的登录密码哦。</p>
         </div>
     </div>
 </div>
@@ -92,6 +60,6 @@
 <footer th:include="common/footer"></footer>
 <!-- 引入公共JS文件 -->
 <baseJs th:include="common/baseJs"></baseJs>
-<script type="text/javascript" src="resources/js/user/firstStep.js"></script>
+<script type="text/javascript" src="http://localhost:8899/shopping/resources/js/user/fourthStep.js"></script>
 </body>
 </html>

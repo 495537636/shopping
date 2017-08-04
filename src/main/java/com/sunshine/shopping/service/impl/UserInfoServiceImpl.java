@@ -25,11 +25,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
+ * @author LiMG
  * @Title: UserInfoServiceImpl
  * @Description: <功能详细描述>
- * @author LiMG
  * @date 2017/6/2414:46
- * @see  [相关类/方法]
+ * @see [相关类/方法]
  * @since [产品/模块版本]
  */
 @Service
@@ -60,11 +60,11 @@ public class UserInfoServiceImpl implements UserInfoService {
         }
     }
 
-    /** 
+    /**
      * @Title: queryUserInfoByUsername
      * @Description: 根据用户名获取用户信息详情
      * @author LiMG
-     * @date 2017/7/12 16:21 
+     * @date 2017/7/12 16:21
      * @see [类、类#方法、类#成员]
      */
     @Override
@@ -122,6 +122,26 @@ public class UserInfoServiceImpl implements UserInfoService {
         userInfoEntity.setUserId(GenerateIDUtil.generateID());
         userInfoEntity.setPassword(MD5Util.md5(userInfoRequestDTO.getPassword()));
         int result = userInfoMapper.save(userInfoEntity);
+        if (result > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @Title: updateUserInfo
+     * @Description: 修改用户信息
+     * @author LiMG
+     * @date 2017/8/4 10:18
+     * @see [类、类#方法、类#成员]
+     */
+    @Override
+    public Boolean updateUserInfo(UserInfoRequestDTO userInfoRequestDTO) throws Exception {
+        ValidateUtil.paramRequired(userInfoRequestDTO, "参数不能为空");
+        UserInfoEntity userInfoEntity = new UserInfoEntity();
+        BeanUtils.copyProperties(userInfoRequestDTO, userInfoEntity);
+        int result = userInfoMapper.update(userInfoEntity);
         if (result > 0) {
             return true;
         } else {

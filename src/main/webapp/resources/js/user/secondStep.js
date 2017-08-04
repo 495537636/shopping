@@ -3,6 +3,8 @@ var secondStep = {
     phoneCodeFlag : false,
     init:function() {
         jQuery(document).ready(function($){
+            // 设置header标题
+            $("#title").html("找回密码");
             $("#getPhoneCode").click(function() {
                 secondStep.sendPhoneCode();
             });
@@ -89,6 +91,7 @@ var secondStep = {
                         secondStep.checkFaile("验证码错误");
                     }
                 } else {
+                    secondStep.phoneCodeFlag = false;
                     secondStep.checkFaile(response.msg);
                 }
             }
@@ -98,7 +101,7 @@ var secondStep = {
         $("#errorMsg").text("").hide();
     },
     checkFaile:function(msg){
-        $("#errorMsg").text(msg).hide();
+        $("#errorMsg").text(msg).show();
     }
 };
 

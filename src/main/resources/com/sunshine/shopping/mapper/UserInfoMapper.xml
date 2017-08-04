@@ -85,4 +85,27 @@
         </trim>
     </insert>
 
+    <!-- 修改用户信息 -->
+    <update id="update">
+        update userinfo
+        <set>
+            <if test="username != null and username != ''">
+                user_name = #{username, jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null and userPhone != ''">
+                user_phone = #{userPhone, jdbcType=VARCHAR},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password, jdbcType=VARCHAR},
+            </if>
+            <if test="userType != null">
+                user_type = #{userType, jdbcType=INTEGER},
+            </if>
+            <if test="userFlag != null">
+                user_flag = #{userFlag, jdbcType=INTEGER},
+            </if>
+        </set>
+        where user_id = #{userId, jdbcType=VARCHAR}
+    </update>
+
 </mapper>

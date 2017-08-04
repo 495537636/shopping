@@ -41,4 +41,13 @@ public interface UserInfoService {
      */
     Boolean saveUserInfo(UserInfoRequestDTO userInfoRequestDTO) throws Exception;
 
+    /**
+     * @Title: updateUserInfo
+     * @Description: 修改用户信息
+     * @author LiMG
+     * @date 2017/8/4 10:17
+     * @see [类、类#方法、类#成员]
+     */
+    Boolean updateUserInfo(UserInfoRequestDTO userInfoRequestDTO) throws Exception;
+
 }

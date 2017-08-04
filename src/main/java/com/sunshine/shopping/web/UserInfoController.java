@@ -454,15 +454,64 @@ public class UserInfoController extends BaseController {
                 if (!md5.equals(redisMd5)) {
                     return "common/error";
                 }
-                // 校验完成，删除保存的MD5值
-                //RedisUtil.del(redisKey);
             }
             model.addAttribute("loginName", loginName);
             model.addAttribute("userPhone", userPhone);
+            model.addAttribute("key", key);
         } catch (Exception e) {
             LOGGER.error("找回密码第三步异常,异常信息:{}", e.getMessage(), e);
         }
         return "user/thirdStep";
+    }
+
+    /**
+     * @Title: fourthStep
+     * @Description: 找回密码第四步
+     * @author LiMG
+     * @date 2017/8/1 13:09
+     * @see [类、类#方法、类#成员]
+     */
+    @RequestMapping("fourthStep")
+    public String fourthStep(HttpServletRequest request, Model model) {
+        try {
+            String loginName = request.getParameter("loginName");
+            String userPhone = request.getParameter("userPhone");
+            String password = request.getParameter("password");
+            String key = request.getParameter("key");
+            if (StringUtils.isEmpty(key)) {
+                return "common/error";
+            } else {
+                UserInfoRequestDTO userInfoRequestDTO = new UserInfoRequestDTO();
+                userInfoRequestDTO.setUsername(loginName);
+                userInfoRequestDTO.setUserPhone(loginName);
+                UserInfoResponseDTO responseDTO = userInfoService.queryUserInfo(userInfoRequestDTO);
+                if (null == responseDTO) {
+                    return "common/error";
+                }
+                String md5 = MD5Util.md5(responseDTO.getUserId() + StaticUtil.MD5_KEY + userPhone);
+                String redisKey = StaticUtil.USER_FIND_PASSWORD_MD5 + getSessiongId(request);
+                String redisMd5 = RedisUtil.get(redisKey);
+                if (!md5.equals(redisMd5)) {
+                    return "common/error";
+                }
+                // 校验完成，删除保存的MD5值
+                RedisUtil.del(redisKey);
+                String md5Password = MD5Util.md5(password);
+                userInfoRequestDTO = new UserInfoRequestDTO();
+                userInfoRequestDTO.setUserId(responseDTO.getUserId());
+                userInfoRequestDTO.setPassword(md5Password);
+                Boolean result = userInfoService.updateUserInfo(userInfoRequestDTO);
+                if (result) {
+                    model.addAttribute("loginName", loginName);
+                    return "user/fourthStep";
+                } else {
+                    return "common/error";
+                }
+            }
+        } catch (Exception e) {
+            LOGGER.error("找回密码第四步异常,异常信息:{}", e.getMessage(), e);
+            return "common/error";
+        }
     }
 
 }

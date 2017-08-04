@@ -34,6 +34,9 @@ public class StaticUtil {
     // 用户注册获取验证码次数
     public static final String USER_REGISTER_PHONE_CODE_COUNT = "USER_REGISTER_PHONE_CODE_COUNT_";
 
+    // 用户找回密码获取验证码次数
+    public static final String USER_FIND_PASSWORD_PHONE_CODE_COUNT = "USER_FIND_PASSWORD_PHONE_CODE_COUNT_";
+
     // 用户登录状态标识
     public static final String USER_LOGIN_FLAG = "USER_LOGIN_FLAG_";
 
@@ -53,7 +56,7 @@ public class StaticUtil {
     public static final String USER_FORGET_PHONE_CODE = "USER_FORGET_PHONE_CODE_";
 
     // 用户获取验证码超时时间
-    public static final String USER_REGISTER_PHONE_CODE_TIME_OUT = "USER_REGISTER_PHONE_CODE_TIME_OUT_";
+    public static final String USER_PHONE_CODE_TIME_OUT = "USER_PHONE_CODE_TIME_OUT_";
 
     // 用户找回密码MD5加密数据
     public static final String USER_FIND_PASSWORD_MD5 = "USER_FIND_PASSWORD_MD5_";

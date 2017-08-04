@@ -27,6 +27,11 @@ public class UserInfoRequestDTO implements Serializable {
     private static final long serialVersionUID = 3924579085267185942L;
 
     /**
+     * 用户ID
+     */
+    private String userId;
+
+    /**
      * 用户名
      */
     private String username;
@@ -45,6 +50,14 @@ public class UserInfoRequestDTO implements Serializable {
      * 登录名
      */
     private String loginName;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getUsername() {
         return username;
