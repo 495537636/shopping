@@ -12,7 +12,14 @@
         <!-- 引入头部内容 -->
         <div th:include="common/header"></div>
 
-        <a href="login.html" class="btn btn-primary">登录</a>
+        <div class="container">
+            <form class="navbar-form navbar-left" action="search/searchGoods" method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="keywords" placeholder="搜索商品" />
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+        </div>
 
         <!-- 引入公共JS文件 -->
         <baseJs th:include="common/baseJs"></baseJs>

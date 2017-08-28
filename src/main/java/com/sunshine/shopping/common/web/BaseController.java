@@ -63,13 +63,13 @@ public class BaseController {
     }
 
     /**
-     * @Title: getSessiongId
+     * @Title: getSessionId
      * @Description: 获取sessionId
      * @author LiMG
      * @date 2017/7/20 10:43
      * @see [类、类#方法、类#成员]
      */
-    public String getSessiongId(HttpServletRequest request) {
+    public String getSessionId(HttpServletRequest request) {
         return request.getSession().getId();
     }
 

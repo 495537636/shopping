@@ -38,22 +38,14 @@ public class DateUtil {
         Date currentDate = calendar.getTime();
         long currTime = currentDate.getTime();
         calendar.add(Calendar.DATE, 1);
-        calendar.set(Calendar.HOUR, -12);
+        calendar.set(Calendar.HOUR, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         Date newDate = calendar.getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        System.out.println(sdf.format(newDate));
         long tomorrowTime = newDate.getTime();
-        System.out.println("currentTime=" + currTime);
-        System.out.println("tomorrowTime=" + tomorrowTime);
         long time = (tomorrowTime - currTime) / 1000;
         return time;
-    }
-
-    public static void main(String[] args) {
-        long time = DateUtil.countTimeFromCurrentToTomorrow();
-        System.out.println(time);
     }
 
 }

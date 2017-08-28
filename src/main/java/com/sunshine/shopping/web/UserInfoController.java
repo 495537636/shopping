@@ -75,7 +75,7 @@ public class UserInfoController extends BaseController {
             }
             // 将密码进行MD5加密
             userInfoRequestDTO.setPassword(MD5Util.md5(password));
-            String sessionId = getSessiongId(request);
+            String sessionId = getSessionId(request);
             String redisCheckCode = RedisUtil.get(StaticUtil.USER_LOGIN_CHECK_CODE + sessionId);
             if (StringUtils.isNotEmpty(redisCheckCode)) {
                 // 校验验证码正确性
@@ -127,7 +127,7 @@ public class UserInfoController extends BaseController {
     @ResponseBody
     @RequestMapping("checkSessionId")
     public ResponseResult<Boolean> checkSessionId(HttpServletRequest request, HttpServletResponse response) {
-        String sessionId = getSessiongId(request);
+        String sessionId = getSessionId(request);
         if (null == sessionId) {
             request.getSession(true);
             return null;
@@ -154,7 +154,7 @@ public class UserInfoController extends BaseController {
     public void getCaptchaImage(HttpServletRequest request, HttpServletResponse response) {
         int type = null == request.getParameter("type") ? 1 : "".equals(request.getParameter("type")) ? 1 : Integer.parseInt(request.getParameter("type"));
         try {
-            String sessionId = getSessiongId(request);
+            String sessionId = getSessionId(request);
             String code = CaptchaUtil.generateVerifyCode(4);
             String key = null;
             if (type == 1) {
@@ -267,7 +267,7 @@ public class UserInfoController extends BaseController {
     @RequestMapping("verifyCheckCode")
     public ResponseResult<Boolean> verifyCheckCode(HttpServletRequest request, HttpServletResponse response) {
         try {
-            String sessionId = getSessiongId(request);
+            String sessionId = getSessionId(request);
             String checkCode = request.getParameter("checkCode");
             int type = null == request.getParameter("type") ? 1 : "".equals(request.getParameter("type")) ? 1 : Integer.parseInt(request.getParameter("type"));
             if (StringUtils.isNotEmpty(checkCode)) {
@@ -319,7 +319,7 @@ public class UserInfoController extends BaseController {
             Boolean flag = (Boolean) map.get("flag");
             if (flag.booleanValue()) {
                 // 移除图片验证码
-                String sessionId = getSessiongId(request);
+                String sessionId = getSessionId(request);
                 String checkCodeKey = StaticUtil.USER_REGISTER_CHECK_CODE + sessionId;
                 RedisUtil.del(checkCodeKey);
                 return ResponseUtil.success(true);
@@ -415,7 +415,7 @@ public class UserInfoController extends BaseController {
             model.addAttribute("showUserPhone", userPhone.substring(0, 3) + newStr + userPhone.substring(8));
             model.addAttribute("userPhone", responseDTO.getUserPhone());
             String md5 = MD5Util.md5(responseDTO.getUserId() + StaticUtil.MD5_KEY + userPhone);
-            String key = StaticUtil.USER_FIND_PASSWORD_MD5 + getSessiongId(request);
+            String key = StaticUtil.USER_FIND_PASSWORD_MD5 + getSessionId(request);
             RedisUtil.set(key, md5);
             model.addAttribute("key", md5);
             model.addAttribute("loginName", loginName);
@@ -449,7 +449,7 @@ public class UserInfoController extends BaseController {
                     return "common/error";
                 }
                 String md5 = MD5Util.md5(responseDTO.getUserId() + StaticUtil.MD5_KEY + userPhone);
-                String redisKey = StaticUtil.USER_FIND_PASSWORD_MD5 + getSessiongId(request);
+                String redisKey = StaticUtil.USER_FIND_PASSWORD_MD5 + getSessionId(request);
                 String redisMd5 = RedisUtil.get(redisKey);
                 if (!md5.equals(redisMd5)) {
                     return "common/error";
@@ -489,7 +489,7 @@ public class UserInfoController extends BaseController {
                     return "common/error";
                 }
                 String md5 = MD5Util.md5(responseDTO.getUserId() + StaticUtil.MD5_KEY + userPhone);
-                String redisKey = StaticUtil.USER_FIND_PASSWORD_MD5 + getSessiongId(request);
+                String redisKey = StaticUtil.USER_FIND_PASSWORD_MD5 + getSessionId(request);
                 String redisMd5 = RedisUtil.get(redisKey);
                 if (!md5.equals(redisMd5)) {
                     return "common/error";

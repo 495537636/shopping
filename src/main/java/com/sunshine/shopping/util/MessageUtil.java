@@ -74,7 +74,11 @@ public class MessageUtil {
         } else {
             sendCount = 1;
         }
-        RedisUtil.set(countKey, String.valueOf(sendCount), 3600);
+        long time = DateUtil.countTimeFromCurrentToTomorrow();
+        if (time < 3600) {
+            time = 3600;
+        }
+        RedisUtil.set(countKey, String.valueOf(sendCount), time);
         // 10分钟有效期
         RedisUtil.set(redisKey, num, 600);
         map.put("flag", true);

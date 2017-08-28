@@ -10,5 +10,9 @@ public class GenerateIDUtil {
         String uuid = str.replace("-", "");
         return uuid;
     }
+    
+    public static void main(String[] args) {
+	    System.out.println(GenerateIDUtil.generateID());
+    }
 	
 }

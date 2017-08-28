@@ -18,7 +18,7 @@
     <select id="query" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from userinfo where user_flag = 0
+        from user_info where user_flag = 0
         <choose>
             <when test="username != null and userPhone != null">
                 and (user_name = #{username, jdbcType=VARCHAR}
@@ -44,7 +44,7 @@
 
     <!-- 保存用户信息 -->
     <insert id="save">
-        insert into userinfo
+        insert into user_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
             user_id,
             <if test="username != null and username != ''">
@@ -87,7 +87,7 @@
 
     <!-- 修改用户信息 -->
     <update id="update">
-        update userinfo
+        update user_info
         <set>
             <if test="username != null and username != ''">
                 user_name = #{username, jdbcType=VARCHAR},
