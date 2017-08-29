@@ -1,0 +1,178 @@
+body {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    line-height: 150%;
+    margin: auto;
+    font: 13px/ 18px "宋体", arial, sans-serif;
+    color: #585858;
+}
+
+a:hover {
+    color: #f30213;
+}
+
+a {
+    color: #666;
+    text-decoration: none;
+}
+
+a, address, b, big, blockquote, body, center, cite, code, dd, del, div, dl, dt, em, fieldset, font, form, h1, h2, h3, h4, h5, h6, html, i, iframe, img, ins, label, legend, li, ol, p, pre, small, span, strong, u, ul, var {
+    margin: 0;
+    padding: 0;
+}
+
+#shortcut-2014 {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    background: #e3e4e5;
+    border-bottom: solid 1px #ddd;
+}
+
+#shortcut-2014 .w {
+    background: #e3e4e5;
+    color: #999;
+}
+
+.w {
+    margin: 0 auto;
+}
+
+.fl {
+    float: left;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+#shortcut-2014 .w {
+    color: #999;
+}
+
+#shortcut-2014 li {
+    float: left;
+    height: 30px;
+    padding: 0 2px;
+}
+
+#shortcut-2014 #ttbar-home .iconfont {
+    position: relative;
+    display: inline;
+    font-size: 16px;
+    color: #5c5452;
+    padding-right: 5px;
+}
+
+.iconfont {
+    font-family: iconfont;
+    font-style: normal;
+    -webkit-text-stroke-width: .2px;
+}
+
+#shortcut-2014 a {
+    color: #999;
+}
+
+#shortcut-2014 #ttbar-mycity {
+    padding-left: 0;
+}
+
+#shortcut-2014 li.dorpdown {
+    z-index: 13;
+}
+
+#shortcut-2014 li {
+    float: left;
+    height: 30px;
+    padding: 0 2px;
+}
+
+.dropdown {
+    position: relative;
+}
+
+#shortcut-2014 #ttbar-mycity .dt {
+    padding: 0 25px 0 10px;
+}
+
+#shortcut-2014 .dt {
+    float: left;
+}
+
+.cw-icon {
+    position: relative;
+    cursor: default;
+    zoom: 1;
+}
+
+#shortcut-2014 #ttbar-mycity .iconfont {
+    position: relative;
+    display: inline;
+    font-size: 14px;
+    color: #5c5452;
+}
+
+.cw-icon .i, .cw-icon i {
+    overflow: hidden;
+}
+
+#shortcut-2014 #ttbar-mycity .dd {
+    width: 301px;
+    padding: 10px 0 10px 10px;
+}
+
+#shortcut-2014 .dorpdown-layer {
+    top: 30px;
+    background: #fff;
+    border: 1px solid #ddd;
+}
+
+#shortcut-2014 .dd {
+    line-height: 24px;
+}
+
+.dorpdown-layer {
+    display: none;
+    position: absolute;
+}
+
+#shortcut-2014 #ttbar-mycity .dd-spacer {
+    left: 0;
+    width: 74px;
+}
+
+#shortcut-2014 .dd-spacer {
+    position: absolute;
+    top: -7px;
+    height: 10px;
+    background: #fff;
+    overflow: hidden;
+}
+
+#shortcut-2014 #ttbar-mycity {
+    padding-left: 0;
+}
+
+#shortcut-2014 li.hover {
+    padding: 0 1px;
+}
+
+#shortcut-2014 li.dorpdown {
+    z-index: 13;
+}
+
+#shortcut-2014 li {
+    float: left;
+    height: 30px;
+}
+
+.dorpdown {
+    position: relative;
+}
