@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunshine.shopping.mapper.ServiceAreaMapper">
+    <resultMap id="BaseResultMap" type="com.sunshine.shopping.model.entity.ServiceAreaEntity">
+        <id column="pkid" property="pkid" jdbcType="INTEGER"/>
+        <result column="area_name" property="areaName" jdbcType="VARCHAR"/>
+        <result column="area_code" property="areaCode" jdbcType="VARCHAR"/>
+        <result column="area_num" property="areaNum" jdbcType="INTEGER"/>
+        <result column="area_flag" property="areaFlag" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        pkid, area_name, area_code, area_num, area_flag
+    </sql>
+
+    <!-- 查询服务地区列表 -->
+    <select id="queryList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from service_area_info
+        where area_flag = 0
+        order by pkid
+    </select>
+
+    <!-- 获取指定区域代码的详细信息 -->
+    <select id="query" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from service_area_info
+        where area_flag = 0
+        and area_code = #{areaCode,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

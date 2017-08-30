@@ -34,7 +34,6 @@ public class SearchController extends BaseController {
     @RequestMapping("searchGoods")
     public String searchGoods(HttpServletRequest request, HttpServletResponse response) {
         String keyword = request.getParameter("keyword");
-
         return "search";
     }
 

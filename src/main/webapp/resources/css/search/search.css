@@ -103,7 +103,7 @@ body {
     padding: 0 8px;
 }
 
-#shortcut-2014 #ttbar-mycity .item:hover a {
+#shortcut-2014 #ttbar-mycity .item:hover a:not(.selected) {
     background: #F4F4F4;
 }
 
@@ -289,10 +289,15 @@ a:hover {
     color: #f30213;
 }
 
+#settleupDiv .glyphicon-shopping-cart {
+    left: 5px;
+    top: 2px;
+}
+
 #settleupDiv .ci-count {
     position: absolute;
-    top: 7px;
-    left: 105px;
+    top: 8px;
+    left: 103px;
     display: inline-block;
     padding: 1px;
     font-size: 12px;
