@@ -73,7 +73,7 @@ public class AddressUtil {
             String path = "/rest/160601/ip/getIpInfo.json";
             String method = "GET";
             // 我的appcode码
-            String appcode = "dce296bb395f432092b05e1103d78461";
+            String appcode = "xxxxxxxxx";
             Map<String, String> headers = new HashMap<String, String>();
             headers.put("Authorization", "APPCODE " + appcode);
             Map<String, String> querys = new HashMap<String, String>();
